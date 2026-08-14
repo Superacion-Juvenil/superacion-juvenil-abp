@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for sharing web -->
+    <title>Únete | SupJuvABP</title>
+    <meta name="title" content="Superación Juvenil ABP" />
+    <meta name="description" content="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://metatags.io/" />
+    <meta property="og:title" content="Superación Juvenil ABP" />
+    <meta property="og:description" content="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad." />
+    <meta property="og:image" content="assets/SJ-2.jpg" />
+
+    <!-- X (Twitter) -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://metatags.io/" />
+    <meta property="twitter:title" content="Superación Juvenil ABP" />
+    <meta property="twitter:description" content="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad." />
+    <meta property="twitter:image" content="assets/SJ-2.jpg" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#023b63"><!-- Color Pestaña -->
+
+    <link rel="canonical" href="https://superacionjuvenil.org/">
+    <link rel="alternate" hreflang="es-MX" href="https://superacionjuvenil.org/">
+    <meta name="robots" content="index, follow">
+    <meta property="og:site_name" content="Superación Juvenil ABP">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+
+    <link rel="stylesheet" href="styles/style.css?ver=3.1">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+    
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "NonprofitOrganization",
+        "name": "Superación Juvenil ABP",
+        "url": "https://superacionjuvenil.org/",
+        "logo": "https://superacionjuvenil.org/assets/logo-sj.png"
+        }
+    </script>
+
+</head>
+<body>
+    
+
+    <input type="checkbox" id="menu-chk" style="display: none;"><!-- Este es un checkbox para ver si está activo o no para deslizar el nav -->
+        <label id="dim-menu-close" for="menu-chk" onclick="overFlowV()"></label>
+        <!-- Este es un label que sirve para cerrar el menu también, es una barrita que oscurece el espacio visible cuando se abre el menú -->
+        <!-- Aqui se llama a overFlowV() para que cuando se abra el menu SI se pueda seguir deslizando -->
+
+    <div class="space" style="width: 100%; height: 120px;"></div>
+
+    <header id="header" class="nav-up" style="position: fixed;">
+        <label class="menu-icon" for="menu-chk" onclick="overFlowH()">
+            <div class="bar-menu-icon"></div>
+            <div class="bar-menu-icon"></div>
+            <div class="bar-menu-icon"></div>
+        </label>
+
+        <a home-link="true" id="img-hover" href="/index.html">
+            <img class="header-img" src="assets/LOGO SJ PANTONES-03.png" alt="ABP_LOGO">
+        </a>
+        <nav>
+            <div class="header-option"><a href="index.html">Inicio</a></div>
+            <div class="header-option"><a href="nosotros.html">Nosotros</a></div>
+            <div class="header-option"><a href="proyectos.html">Proyectos</a></div>
+            <div class="header-aportar"><a href="unete.html">Aportar a la causa</a></div>
+        </nav>
+
+        <div class="nav-desk">
+            <div class="header-option-desk"><a href="index.html">Inicio</a></div>
+            <div class="header-option-desk"><a href="nosotros.html">Nosotros</a></div>
+            <div class="header-option-desk"><a href="proyectos.html">Proyectos</a></div>
+            <div class="header-aportar-desk"><a href="unete.html">Aportar a la causa</a></div>
+        </div>
+        
+    </header>
+
+    <div class="unete-header">
+        <h1 data-aos="fade-right" data-aos-delay="150">ÚNETE</h1>
+    </div>
+    <div class="tu-ayuda">
+        <div class="ayuda-title" data-aos="fade-right">
+            <h1>Con tu ayuda podemos llegar a impactar a más jóvenes</h1>
+            <h2>¿Cómo puedo ayudar? donando de estas maneras</h2>
+        </div>
+        <div class="ayuda-info" data-aos="fade-up">
+            <div class="ayuda-tarjeta">
+                <h3>Donativo por transferencia bancaria</h3>
+                <p>
+                    Cuenta de depósito
+                    <br>Banco: Banorte
+                    <br>Cuenta: <span id="cuentaNumbers">0568282243 </span> <button class="copyBtn" onclick="copyContent('cuenta')"><div id="copy-cloud-cuenta">¡Copiado!</div></button>
+                    <br>Titular: Superación Juvenil A.B.P. 
+                    <br>Clabe: <span id="clabeNumbers">072580005682822434 </span><button class="copyBtn" onclick="copyContent('clabe')"><div id="copy-cloud-clabe">¡Copiado!</div></button>
+                    <br>Sucursal: 0161 Morones Prieto
+                </p>
+                <span>
+                    IMPORTANTE
+                    En caso de que el pago sea a través de transferencia, favor de anotar como concepto solamente "DONATIVO nombre", de lo contrario, no podemos generar el Recibo de Donativo. ¡Muchas gracias!
+                </span>
+            </div>
+            <div class="ayuda-line"></div>
+            <div class="ayuda-paypal">
+                <h3>Paypal</h3>
+                <h4 style="margin-top: -1rem; text-align: center; margin-bottom: 1rem;">Se requiere cuenta de Paypal</h4>
+                <!-- <a href="https://www.paypal.com/donate/?hosted_button_id=EZJXTYB5SW2W8" target="_blank"> -->
+                <a href="https://paypal.me/SuperacionJuvenilABP?locale.x=es_XC&country.x=MX" target="_blank">
+                <button class="button-paypal">
+                        <span>Dona con</span>
+                        <img src="./assets/paypal-logo.png" alt="Logo Paypal">
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contacto" data-aos="fade-right" data-aos-delay="150">
+        <div class="formulario">
+            <h1>Información de contacto</h1>
+            <!-- <form action="./mail/message.php" method="post"> -->
+            <form action="./mail/message.php" method="post">
+                <input type="text" placeholder="Email" name="correo">
+                <input type="text" placeholder="Nombre" name="nombre">
+                <textarea placeholder="Mensaje" name="mensaje"></textarea>
+                <button class="mail-button" type="submit">Contáctanos ></button>
+                <!-- Tal vez poner un mensaje como "te contactaremos pronto" -->
+            </form>
+        </div>
+        <div class="direccion">
+            <h1>Dirección</h1>
+            <h3>Loma Redonda #1517 Col. Loma Larga, Monterrey, N.L. C.P. 64710</h3>
+            <h1>LLámanos</h1>
+            <h3>Tel: (81) 1352 5333 ext. 106 y 108</h3>
+            <div class="redes">
+                <a href="https://www.facebook.com/superacionjuvenilabp/" target="_blank"><img src="./assets/facebook.svg" alt="Facebook logo" style="padding-top: 2px;" loading="lazy"></a>
+                <a href="https://www.instagram.com/superacionjuvenil/" target="_blank"><img src="./assets/instagram.svg" alt="Instagram logo" loading="lazy"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-logo">
+            <img class="header-img" src="assets/LOGOSJPANTONES-04.png" alt="ABP_LOGO">
+        </div>
+
+        <div class="footer-contacto">
+            <div class="contacto-title">Contacto</div>
+            <div class="contacto-tel">Tel: (81)1352 5333 ext. 106 y 108</div>
+            <div class="contacto-correo">desarrollo@superacionjuvenil.org</div>
+            <div class="contacto-redes">
+                <a href="https://www.facebook.com/superacionjuvenilabp/" target="_blank" style="padding-top:43px"><img src="./assets/facebook.svg" alt="Facebook logo" style="width: 54px; padding-bottom: 2px;" loading="lazy"></a>
+                <a href="https://www.instagram.com/superacionjuvenil/" target="_blank" style="padding-top:43px"><img src="./assets/instagram.svg" alt="Instagram logo" loading="lazy"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flash message container -->
+    <div id="flash-msg" style="
+    position: fixed;
+    inset: auto 1rem 1rem 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+    background: #e8f5ee;
+    color: #1b5e20;
+    border: 1px solid #c7e8d3;
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    display: none; z-index: 9999;">
+    <strong id="flash-title">¡Listo!</strong>
+    <span id="flash-text" style="margin-left:.5rem;"></span>
+    <button id="flash-close" aria-label="Cerrar" style="
+        float:right; margin-left:1rem; background:transparent; border:0; font-size:18px; cursor:pointer;">×</button>
+    </div>
+
+    <script>
+    (function () {
+    // Lee cookie por nombre
+    function getCookie(name){
+        return document.cookie
+        .split('; ')
+        .find(row => row.startsWith(name + '='))
+        ?.split('=')[1];
+    }
+
+    function eraseCookie(name){
+        document.cookie = name + '=; Max-Age=0; path=/';
+    }
+
+    var msg = getCookie('notificacion');
+    if (!msg) return;
+
+    // Decide color según éxito/error
+    var isOk = /correctamente|enviado/i.test(decodeURIComponent(msg));
+    var flash = document.getElementById('flash-msg');
+    var text = document.getElementById('flash-text');
+    var title = document.getElementById('flash-title');
+
+    // Estilos para éxito o error
+    if (!isOk){
+        flash.style.background = '#fdecea';
+        flash.style.color = '#b71c1c';
+        flash.style.borderColor = '#f5c6c6';
+        title.textContent = 'Ups…';
+    }
+
+    text.textContent = ' ' + decodeURIComponent(msg);
+    flash.style.display = 'block';
+
+    // Cerrar manual
+    document.getElementById('flash-close').onclick = function(){
+        flash.style.display = 'none';
+    };
+
+    // Auto-ocultar a los 5s
+    setTimeout(function(){ flash.style.display = 'none'; }, 5000);
+
+    // Borra la cookie para que no se repita
+    eraseCookie('notificacion');
+    })();
+    </script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/copy.js"></script>
+</body>
+</html>
