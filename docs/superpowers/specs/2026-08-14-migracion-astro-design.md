@@ -173,7 +173,12 @@ Tres fuentes de ruido hay que neutralizar para que la comparación signifique al
 
 1. Las 140 comparaciones de screenshots pasan el umbral de 0,5%.
 2. Las URLs siguen siendo `/nosotros.html`, no `/nosotros/`.
-3. El peso total transferido baja de ~132 MB a menos de 15 MB.
+3. El peso transferido de las páginas baja al menos un 70%.
+   (Corregido 2026-08-18: el criterio original decía "menos de 15 MB" pero
+   confundía el peso de `dist/` con el peso transferido. Los PDFs de
+   `files_download/` pesan 48 MB y solo se descargan si alguien los clickea:
+   no son peso de página. Medido con Playwright sumando bytes de red por
+   página: 68,13 MB -> 17,41 MB en total, -74%; la home 47,56 -> 4,68 MB, -90%.)
 4. Cero jQuery y cero `<script>` inline en el HTML final.
 5. El formulario envía un correo real de punta a punta.
 
