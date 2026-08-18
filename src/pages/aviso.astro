@@ -3,15 +3,20 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   titulo="Aviso de Privacidad | SupJuvABP"
-  descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
-  canonica="https://superacionjuvenil.org/"
   headerFijo={true}
   mostrarAviso={true}
+  verEstilo="1.3"
+  seo={false}
 >
-  <!-- El original (.baseline/aviso.html) no trae meta name="description" ni
-       link rel="canonical" en su <head>; se reutilizan los valores estándar del
-       sitio (iguales a los de las demás páginas) porque Base.astro los requiere
-       y no afectan el render visual. -->
+  <!-- .baseline/aviso.html es la única página del original cuyo <head> NO
+       trae meta description, los og:*/twitter:*, canonical/hreflang/robots,
+       og:site_name/locale/dimensiones ni el <script type="application/ld+json">
+       (solo charset, viewport, theme-color, style.css?ver=1.3 y aos.css).
+       seo={false} apaga ese bloque entero en Base.astro en vez de mandarlo
+       igual que en las otras 4 páginas: entre otras cosas, evita declarar un
+       <link rel="canonical" href="https://superacionjuvenil.org/"> que
+       marcaría a aviso.html como duplicado de la portada ante buscadores,
+       algo que el sitio original no hace. -->
   <!-- Contenido extraído con: sed -n '47,91p' .baseline/aviso.html -->
   <!-- (47..115 menos el footer, que ya se renderiza vía <Footer mostrarAviso={true} /> en Base.astro) -->
 

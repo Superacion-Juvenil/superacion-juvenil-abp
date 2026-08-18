@@ -4,58 +4,102 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   titulo: string;
-  descripcion: string;
-  canonica: string;
+  // Solo hacen falta cuando seo=true (ver abajo); aviso.html no las usa.
+  descripcion?: string;
+  canonica?: string;
   headerFijo?: boolean;
   // Solo nosotros.html y aviso.html traen el link "Aviso de Privacidad." en el
   // footer del original. Ver el mismo comentario en Footer.astro.
   mostrarAviso?: boolean;
+  // El query de cache-busting de style.css NO es el mismo en las 5 páginas del
+  // original (verificado archivo por archivo en .baseline/*.html): 3.1 en
+  // index/proyectos/unete, 3.5 en nosotros, 1.3 en aviso.
+  verEstilo?: string;
+  // aviso.html es la única página del original cuyo <head> NO trae meta
+  // description, los og:*/twitter:*, canonical/hreflang/robots,
+  // og:site_name/locale/dimensiones ni el <script type="application/ld+json">
+  // (verificado con .baseline/aviso.html completo). Con seo=false se omite
+  // todo ese bloque en vez de mandarlo igual iría en las otras 4 páginas —
+  // mandarlo agregaría, entre otras cosas, un <link rel="canonical"> que
+  // declara a aviso.html duplicado de la portada ante los buscadores, algo
+  // que el original no hace.
+  seo?: boolean;
+  // Solo index.html y proyectos.html cargan owl.carousel.min.css en el
+  // original (son las únicas con carrusel owl); nosotros/unete/aviso no.
+  owlCss?: boolean;
 }
 
-const { titulo, descripcion, canonica, headerFijo = false, mostrarAviso = false } = Astro.props;
+const {
+  titulo,
+  descripcion,
+  canonica,
+  headerFijo = false,
+  mostrarAviso = false,
+  verEstilo = '3.1',
+  seo = true,
+  owlCss = false,
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <title>{titulo}</title>
-    <meta name="title" content={titulo} />
-    <meta name="description" content={descripcion} />
+    {seo && (
+      <>
+        <!-- name=title / og:title / twitter:title NO llevan {titulo}: verificado en
+             las 4 páginas que traen este bloque (.baseline/index|nosotros|proyectos
+             |unete.html) que las tres siempre traen el nombre del sitio a secas,
+             sin importar cuál sea el <title> de la página (p. ej. nosotros.html
+             tiene <title>Nosotros | SupJuvABP</title> pero
+             <meta property="og:title" content="Superación Juvenil ABP">). En index
+             coincide con {titulo} de pura casualidad (su título literal es el
+             nombre del sitio), lo que ocultó la diferencia hasta compararlas todas. -->
+        <meta name="title" content="Superación Juvenil ABP" />
+        <meta name="description" content={descripcion} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://metatags.io/" />
-    <meta property="og:title" content={titulo} />
-    <meta property="og:description" content={descripcion} />
-    <meta property="og:image" content="assets/SJ-2.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://metatags.io/" />
+        <meta property="og:title" content="Superación Juvenil ABP" />
+        <meta property="og:description" content={descripcion} />
+        <meta property="og:image" content="assets/SJ-2.jpg" />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://metatags.io/" />
-    <meta property="twitter:title" content={titulo} />
-    <meta property="twitter:description" content={descripcion} />
-    <meta property="twitter:image" content="assets/SJ-2.jpg" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta property="twitter:title" content="Superación Juvenil ABP" />
+        <meta property="twitter:description" content={descripcion} />
+        <meta property="twitter:image" content="assets/SJ-2.jpg" />
+      </>
+    )}
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#023b63">
 
-    <link rel="canonical" href={canonica}>
-    <link rel="alternate" hreflang="es-MX" href={canonica}>
-    <meta name="robots" content="index, follow">
-    <meta property="og:site_name" content="Superación Juvenil ABP">
-    <meta property="og:locale" content="es_MX">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="1200">
+    {seo && (
+      <>
+        <link rel="canonical" href={canonica}>
+        <link rel="alternate" hreflang="es-MX" href={canonica}>
+        <meta name="robots" content="index, follow">
+        <meta property="og:site_name" content="Superación Juvenil ABP">
+        <meta property="og:locale" content="es_MX">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="1200">
+      </>
+    )}
 
-    <link rel="stylesheet" href="styles/style.css?ver=3.1">
+    <link rel="stylesheet" href={`styles/style.css?ver=${verEstilo}`}>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="owl/owl.carousel.min.css">
+    {owlCss && <link rel="stylesheet" href="owl/owl.carousel.min.css">}
 
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "NonprofitOrganization",
-      "name": "Superación Juvenil ABP",
-      "url": "https://superacionjuvenil.org/",
-      "logo": "https://superacionjuvenil.org/assets/logo-sj.png"
-    })} />
+    {seo && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "NonprofitOrganization",
+        "name": "Superación Juvenil ABP",
+        "url": "https://superacionjuvenil.org/",
+        "logo": "https://superacionjuvenil.org/assets/logo-sj.png"
+      })} />
+    )}
 
     <slot name="head" />
 </head>
