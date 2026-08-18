@@ -85,7 +85,9 @@ import Base from '../layouts/Base.astro';
             import { iniciarAnimaciones } from '../scripts/animaciones.js';
             iniciarAnimaciones();
         </script>
-        <script is:inline src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script is:inline src="js/copy.js"></script>
+        <script>
+            import { iniciarCopiar } from '../scripts/copiar.js';
+            iniciarCopiar();
+        </script>
   </Fragment>
 </Base>

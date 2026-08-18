@@ -203,14 +203,22 @@ import Carrusel from '../components/Carrusel.astro';
     </div>
 
   <Fragment slot="scripts">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" is:inline></script>
     <script>
       import { iniciarAnimaciones } from '../scripts/animaciones.js';
       iniciarAnimaciones();
     </script>
-    <script src="js/aportar-images.js" is:inline></script>
+    <script>
+      import { iniciarHero } from '../scripts/hero.js';
+      iniciarHero();
+    </script>
     <script src="js/carrusel.js" is:inline></script>
-    <script src="./js/menu.js" is:inline></script>
-    <script src="./js/header-scroll.js" is:inline></script>
+    <script>
+      import { iniciarMenu } from '../scripts/menu.js';
+      iniciarMenu();
+    </script>
+    <script>
+      import { iniciarContador } from '../scripts/contador.js';
+      iniciarContador();
+    </script>
   </Fragment>
 </Base>

@@ -3,7 +3,7 @@ interface Props { fijo?: boolean }
 const { fijo = false } = Astro.props;
 ---
 <header id="header" class="nav-up" style={fijo ? 'position: fixed' : undefined}>
-    <label class="menu-icon" for="menu-chk" onclick="overFlowH()">
+    <label class="menu-icon" for="menu-chk">
         <div class="bar-menu-icon"></div>
         <div class="bar-menu-icon"></div>
         <div class="bar-menu-icon"></div>

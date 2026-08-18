@@ -29,9 +29,9 @@ import Base from '../layouts/Base.astro';
                 <p>
                     Cuenta de depósito
                     <br>Banco: Banorte
-                    <br>Cuenta: <span id="cuentaNumbers">0568282243 </span> <button class="copyBtn" onclick="copyContent('cuenta')"><div id="copy-cloud-cuenta">¡Copiado!</div></button>
+                    <br>Cuenta: <span id="cuentaNumbers">0568282243 </span> <button class="copyBtn" data-tipo="cuenta"><div id="copy-cloud-cuenta">¡Copiado!</div></button>
                     <br>Titular: Superación Juvenil A.B.P. 
-                    <br>Clabe: <span id="clabeNumbers">072580005682822434 </span><button class="copyBtn" onclick="copyContent('clabe')"><div id="copy-cloud-clabe">¡Copiado!</div></button>
+                    <br>Clabe: <span id="clabeNumbers">072580005682822434 </span><button class="copyBtn" data-tipo="clabe"><div id="copy-cloud-clabe">¡Copiado!</div></button>
                     <br>Sucursal: 0161 Morones Prieto
                 </p>
                 <span>
@@ -159,7 +159,9 @@ import Base from '../layouts/Base.astro';
             import { iniciarAnimaciones } from '../scripts/animaciones.js';
             iniciarAnimaciones();
         </script>
-        <script is:inline src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script is:inline src="js/copy.js"></script>
+        <script>
+            import { iniciarCopiar } from '../scripts/copiar.js';
+            iniciarCopiar();
+        </script>
   </Fragment>
 </Base>
