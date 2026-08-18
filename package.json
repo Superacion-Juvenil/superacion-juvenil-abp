@@ -7,8 +7,11 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "visual": "node visual/compare.mjs"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "visual": "node visual/compare.mjs",
+    "verificar-fixes": "node scripts/verificar-fixes.mjs"
   },
   "repository": {
     "type": "git",

@@ -82,8 +82,11 @@ import Base from '../layouts/Base.astro';
   <!-- El contenedor de flash-msg y su script van en este slot (que Base.astro
        renderiza después de <Footer />) porque en el original también aparecen
        después del footer, en vez de antes: sed -n '166,241p' .baseline/unete.html -->
-  <!-- El original NO carga menu.js acá, así que overFlowH() tira ReferenceError al
-       abrir el menú hamburguesa. Se replica a propósito: arreglarlo es cambiar el sitio. -->
+  <!-- Igual que el original, esta página no carga menu.js: iniciarMenu() (ver
+       src/scripts/menu.js) solo se invoca desde index.astro y proyectos.astro.
+       El menú hamburguesa se sigue abriendo (es puro CSS del checkbox #menu-chk)
+       pero no bloquea el scroll acá. Es intencional, replica el comportamiento
+       del sitio original: no agregar el import de menu.js a esta página. -->
   <Fragment slot="scripts">
         <!-- Flash message container -->
         <div id="flash-msg" style="
