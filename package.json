@@ -1,0 +1,32 @@
+{
+  "name": "superacion-juvenil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "visual": "node visual/compare.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Superacion-Juvenil/superacion-juvenil-abp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Superacion-Juvenil/superacion-juvenil-abp/issues"
+  },
+  "homepage": "https://github.com/Superacion-Juvenil/superacion-juvenil-abp#readme",
+  "private": "true",
+  "type": "module",
+  "devDependencies": {
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.62.1",
+    "pngjs": "^7.0.0",
+    "serve": "^14.2.6"
+  }
+}
