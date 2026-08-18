@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import Carrusel from '../components/Carrusel.astro';
 ---
 <Base
   titulo="Superación Juvenil ABP"
   descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
   canonica="https://superacionjuvenil.org/"
-  owlCss={true}
+  carruselCss={true}
 >
   <!-- Contenido extraído con:  sed -n '85,269p' .baseline/index.html  -->
   <!-- (85..294 menos el bloque de footer, que ya se renderiza vía <Footer /> en Base.astro) -->
@@ -175,14 +176,19 @@ import Base from '../layouts/Base.astro';
 
     <div class="colaboradores">
         <div class="colab-title">Damos gracias a nuestros colaboradores</div>
-        <div class="owl-carousel colaboradores-logos" data-aos="zoom-up">
+        <Carrusel
+            itemsPorAncho={{ 0: 4, 600: 3, 800: 4, 1000: 5 }}
+            margen={1}
+            class="colaboradores-logos"
+            data-aos="zoom-up"
+        >
             <div class="tarjeta tarj3"></div>
             <div class="tarjeta tarj4"></div>
             <div class="tarjeta tarj5"></div>
             <div class="tarjeta tarj6"></div>
             <div class="tarjeta tarj7"></div>
             <div class="tarjeta tarj8"></div>
-        </div>
+        </Carrusel>
     </div>
 
     <!-- Patron / Sponsor banner -->
@@ -200,43 +206,7 @@ import Base from '../layouts/Base.astro';
     <script src="https://unpkg.com/aos@next/dist/aos.js" is:inline></script>
     <script is:inline>AOS.init();</script>
     <script src="js/aportar-images.js" is:inline></script>
-    <script src="owl/owl.carousel.min.js" is:inline></script>
-    <!-- Inline de owl, extraído con: sed -n '307,339p' .baseline/index.html -->
-    <script is:inline>
-        $(document).ready(function(){
-            $(".owl-carousel").owlCarousel();
-        });
-
-        var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            nav: false,
-            items:3,
-            loop:true,
-            margin:1,
-            autoplay:true,
-            autoplayTimeout:4000,
-            autoplayHoverPause:true,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:4,
-                },
-                600:{
-                    items:3,
-                },
-                800:{
-                    items:4,
-                },
-                1000:{
-                    items:5,
-                }
-            }
-
-        });
-
-        
-        
-    </script>
+    <script src="js/carrusel.js" is:inline></script>
     <script src="./js/menu.js" is:inline></script>
     <script src="./js/header-scroll.js" is:inline></script>
   </Fragment>

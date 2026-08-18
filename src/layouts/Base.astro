@@ -24,9 +24,9 @@ interface Props {
   // declara a aviso.html duplicado de la portada ante los buscadores, algo
   // que el original no hace.
   seo?: boolean;
-  // Solo index.html y proyectos.html cargan owl.carousel.min.css en el
-  // original (son las únicas con carrusel owl); nosotros/unete/aviso no.
-  owlCss?: boolean;
+  // Solo index.html y proyectos.html traen carrusel (antes owl, ahora el
+  // componente propio de Task 5); nosotros/unete/aviso no cargan su CSS.
+  carruselCss?: boolean;
 }
 
 const {
@@ -37,7 +37,7 @@ const {
   mostrarAviso = false,
   verEstilo = '3.1',
   seo = true,
-  owlCss = false,
+  carruselCss = false,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -89,7 +89,7 @@ const {
 
     <link rel="stylesheet" href={`styles/style.css?ver=${verEstilo}`}>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    {owlCss && <link rel="stylesheet" href="owl/owl.carousel.min.css">}
+    {carruselCss && <link rel="stylesheet" href="styles/carrusel.css">}
 
     {seo && (
       <script type="application/ld+json" set:html={JSON.stringify({

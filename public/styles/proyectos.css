@@ -1,8 +1,11 @@
 /* proyectos.css — style.css original líneas 1801-2555: secciones de proyectos.html (title-proyectos,
    programa-adol-uni, video-vem, resi-brecha, slider-proyectos/carrusel, eventos-alto, vivamus), con sus
-   media queries intercaladas. El carrusel (.slider-proyectos, .tar1..19, .owl-stage) queda dentro de este
-   archivo y no en uno separado: sus reglas están intercaladas con el resto de proyectos y con su propia
-   media query (línea ~2464 del original), separarlas habría roto la contigüidad. */
+   media queries intercaladas. El carrusel (.slider-proyectos, .tar1..19) queda dentro de este archivo y
+   no en uno separado: sus reglas están intercaladas con el resto de proyectos y con su propia media query
+   (línea ~2464 del original), separarlas habría roto la contigüidad. El markup del carrusel en sí (antes
+   owl-carousel2, ahora <Carrusel> con clase "proyectos-imgs") vive en src/components/Carrusel.astro +
+   public/styles/carrusel.css + public/js/carrusel.js desde Task 5; estas reglas de acá siguen aplicando
+   igual porque el componente conserva la clase "proyectos-imgs" en su contenedor raíz. */
 .title-proyectos {
   width: 100%;
   height: 100px;
@@ -281,6 +284,9 @@
   width: 100%;
   display: flex;
 }
+/* .owl-stage: selector muerto desde Task 5 (owl se fue, esa clase ya no
+   existe en el DOM). Se deja sin tocar para no meterse en medio del resto de
+   reglas de este bloque; no tiene efecto. */
 .slider-proyectos .proyectos-imgs .owl-stage {
   display: flex;
 }

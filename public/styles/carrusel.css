@@ -1,0 +1,42 @@
+/* Carrusel propio con CSS scroll-snap (reemplaza a Owl Carousel, Task 5).
+   El contenedor raíz (.carrusel) siempre lleva además la clase propia de la
+   página (.colaboradores-logos en index, .proyectos-imgs en proyectos), que
+   ya define su ancho/alto/margen en home.css/proyectos.css: ese CSS no se
+   toca. Acá solo se define lo nuevo: la pista con scroll-snap y el tamaño de
+   cada item (.carrusel-item, agregado por public/js/carrusel.js alrededor de
+   cada hijo del slot), calculado con las variables --items/--margen que ese
+   mismo script actualiza por breakpoint. */
+
+.carrusel-pista {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Edge viejo */
+}
+.carrusel-pista::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.carrusel-item {
+  flex: 0 0 calc((100% - (var(--items, 1) - 1) * var(--margen, 0px)) / var(--items, 1));
+  margin-right: var(--margen, 0px);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* El original (con owl real) trae dots invisibles (owl.carousel.min.css no
+   trae el tema por defecto, así que no tienen ancho/alto/color propio) pero
+   igual ocupan una fila de ~18px debajo del carrusel — comprobado con el
+   arnés visual: sin este alto de más, index.html queda 18px más corto que
+   el original a CUALQUIER ancho (28/28 anchos con "alto distinto" antes de
+   este fix) y todo lo que sigue en la página (patrón, footer) se corre para
+   arriba. Se repone el mismo alto acá en vez de simular dots reales, porque
+   acá no se ven (ver task-5-report.md). Scoping por .colaboradores-logos:
+   proyectos-imgs no lo necesita, tiene alto fijo (250px) con overflow:hidden
+   en su contenedor, así que el mismo hueco fantasma en owl2 nunca fue
+   visible en el alto total de esa página. */
+.carrusel.colaboradores-logos {
+  margin-bottom: 18px;
+}

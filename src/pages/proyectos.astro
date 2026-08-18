@@ -1,12 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import Carrusel from '../components/Carrusel.astro';
 ---
 <Base
   titulo="Proyectos | SupJuvABP"
   descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
   canonica="https://superacionjuvenil.org/"
   headerFijo={true}
-  owlCss={true}
+  carruselCss={true}
 >
   <!-- Contenido extraído con: sed -n '84,196p' .baseline/proyectos.html -->
   <!-- (84..267 menos el footer, que ya se renderiza vía <Footer /> en Base.astro) -->
@@ -70,7 +71,11 @@ import Base from '../layouts/Base.astro';
     </div>
 
     <div class="slider-proyectos">
-        <div class="owl-carousel2 proyectos-imgs" data-aos="zoom-down">
+        <Carrusel
+            itemsPorAncho={{ 0: 1, 600: 2, 800: 3 }}
+            class="proyectos-imgs"
+            data-aos="zoom-down"
+        >
             <div class="tar tar1"></div>
             <div class="tar tar2"></div>
             <div class="tar tar3"></div>
@@ -89,7 +94,7 @@ import Base from '../layouts/Base.astro';
             <div class="tar tar17"></div>
             <div class="tar tar18"></div>
             <div class="tar tar19"></div>
-        </div>
+        </Carrusel>
     </div>
 
     <div class="eventos-alto">
@@ -131,38 +136,7 @@ import Base from '../layouts/Base.astro';
         <script is:inline>
             AOS.init();
         </script>
-        <script is:inline src="owl/owl.carousel.min.js"></script>
-        <script is:inline>
-            $(document).ready(function(){
-                $(".owl-carousel2").owlCarousel();
-            });
-    
-            var owl2 = $('.owl-carousel2');
-            owl2.owlCarousel({
-                nav: false,
-                items:3,
-                loop:true,
-                autoplay:true,
-                autoplayTimeout:4000,
-                autoplayHoverPause:true,
-                responsiveClass:true,
-                responsive:{
-                    0:{
-                        items:1,
-                    },
-                    600:{
-                        items:2,
-                    },
-                    800:{
-                        items:3,
-                    }
-                }
-            });
-    
-            
-            
-        </script>
-    
+        <script is:inline src="js/carrusel.js"></script>
         <script is:inline src="./js/menu.js"></script>
         <!-- El original trae acá un </script> suelto sin apertura (línea 252 de
              .baseline/proyectos.html), inofensivo en el navegador pero que el
