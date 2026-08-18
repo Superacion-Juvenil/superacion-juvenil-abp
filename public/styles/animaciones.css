@@ -31,16 +31,29 @@
 [data-aos="fade-right"] { transform: translate3d(-100px, 0, 0); }
 [data-aos="fade-left"] { transform: translate3d(100px, 0, 0); }
 
-/* zoom-in-down SÍ existe en AOS (a diferencia de zoom-up/zoom-down, ver abajo)
-   y hoy anima en el sitio original: el título "Nuestros Programas" de index. */
-[data-aos="zoom-in-down"] {
+/* aos.css trae una regla GENÉRICA de prefijo, [data-aos^="zoom"], que no
+   filtra por nombre reconocido — aplica a cualquier data-aos que empiece con
+   "zoom", incluidos zoom-up y zoom-down (que no son animaciones válidas de
+   AOS y no tienen su propia regla de transform). Por eso esos dos SÍ animan
+   en el sitio original (los carruseles de "colaboradores" en index y de
+   imágenes en proyectos): heredan este fade genérico, aunque no tengan
+   movimiento direccional propio. Buscar "[data-aos=zoom-up]" en aos.css no
+   encuentra nada — hay que buscar el prefijo para verlo. Confirmado en vivo
+   contra .baseline/index.html y .baseline/proyectos.html: ambos elementos
+   pasan de opacity:0 a opacity:1 con .aos-animate al entrar en viewport.
+   zoom-in-down, en cambio, SÍ es un nombre válido y tiene su propia regla de
+   transform (ver abajo), que se agrega encima de este fade genérico. */
+[data-aos^="zoom"] {
     opacity: 0;
-    transform: translate3d(0, -100px, 0) scale(0.6);
 }
 
-[data-aos="zoom-in-down"].aos-animate {
+[data-aos^="zoom"].aos-animate {
     opacity: 1;
     transform: translateZ(0) scale(1);
+}
+
+[data-aos="zoom-in-down"] {
+    transform: translate3d(0, -100px, 0) scale(0.6);
 }
 
 /* flip-left: solo rota, sin cambiar opacity (igual que en AOS). */
@@ -60,5 +73,3 @@
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* zoom-up y zoom-down no existen en AOS: los 2 elementos que los usan nunca animaron.
-   No agregar reglas para ellos — replicamos el comportamiento actual. */
