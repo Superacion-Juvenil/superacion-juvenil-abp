@@ -179,9 +179,23 @@ Tres fuentes de ruido hay que neutralizar para que la comparación signifique al
 
 ## Comportamientos que se preservan a propósito
 
-`zoom-up` y `zoom-down` no son animaciones válidas de AOS, así que esos 2 elementos hoy no
-se animan. Se replican sin animación. No se "arreglan": el diseño actual es el que es, y
-arreglarlo sería cambiarlo.
+El sitio actual carga scripts distintos en cada página, y eso produce rarezas que **son
+parte del comportamiento observable**. Se replican tal cual; arreglarlas sería cambiar el
+sitio, no migrarlo.
+
+| Quirk | Efecto hoy |
+|---|---|
+| `nosotros.html` no carga ningún script | Sus 16 elementos con `data-aos` nunca animan |
+| `unete.html` y `aviso.html` no cargan `menu.js` | El `onclick="overFlowH()"` del menú hamburguesa tira ReferenceError |
+| `zoom-up` y `zoom-down` no existen en AOS | Esos 2 elementos no animan |
+| `header-scroll.js` solo se carga en `index` | El contador `.count-up2` (4 elementos) solo corre ahí |
+| El grueso de `header-scroll.js` está comentado | De ese archivo solo vive el disparador del contador |
+
+Cada quirk queda documentado en el código con un comentario que explica que es
+intencional, para que nadie lo "arregle" sin querer en el futuro.
+
+Si en algún momento se quieren corregir, es una decisión aparte y posterior a la
+migración, con su propia validación visual.
 
 ## Preguntas abiertas
 
