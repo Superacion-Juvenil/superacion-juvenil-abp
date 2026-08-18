@@ -328,6 +328,17 @@
   margin-top: 3rem;
   color: white;
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.51);
+  /* Repone 18px que en el original ocupaban los dots de owl (invisibles,
+     pero con alto real: ver public/styles/carrusel.css y task-5-report.md).
+     Tiene que ir acá, como padding del fondo #5176A0, y no como margin del
+     hijo .colaboradores-logos: un margin-bottom del hijo colapsa a través
+     de este padre (no tiene padding-bottom ni borde propios) y deja esos
+     18px FUERA del fondo azul y del box-shadow — ahí queda expuesta una
+     franja del fondo blanco de la página, con el box-shadow negro encima
+     sin nada que lo tape (en el original lo tapa .patron-banner, que
+     arranca justo en el borde). Bug real encontrado en review, corregido
+     acá. */
+  padding-bottom: 18px;
 }
 .colaboradores .colab-title {
   width: -moz-max-content;

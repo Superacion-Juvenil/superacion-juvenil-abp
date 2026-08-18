@@ -14,6 +14,19 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Edge viejo */
+  /* .carrusel-pista es flex-child de .carrusel (que en proyectos hereda
+     display:flex + height:250/300px de .proyectos-imgs, ver proyectos.css).
+     Sin esto, el align-items:stretch por defecto la estira a esa altura
+     fija, y con ella también se estira .carrusel-item (su propio hijo,
+     stretch de nuevo) — entonces .tar1 { height:100% } (regla propia de
+     proyectos.css bajo cierta media query) mide 100% de esa altura fija en
+     vez de la altura natural del contenido (290px en el original, medido
+     contra .owl-item). Con background-size:cover eso reencuadra la foto.
+     align-self:flex-start saca a la pista de ese estirado: vuelve a medir
+     según su contenido, igual que el .owl-stage-outer del original.
+     Ojo: tiene que ir acá, en la pista — puesto en .carrusel-item en vez de
+     acá da height:0 (probado). */
+  align-self: flex-start;
 }
 .carrusel-pista::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
@@ -24,19 +37,4 @@
   margin-right: var(--margen, 0px);
   overflow: hidden;
   scroll-snap-align: start;
-}
-
-/* El original (con owl real) trae dots invisibles (owl.carousel.min.css no
-   trae el tema por defecto, así que no tienen ancho/alto/color propio) pero
-   igual ocupan una fila de ~18px debajo del carrusel — comprobado con el
-   arnés visual: sin este alto de más, index.html queda 18px más corto que
-   el original a CUALQUIER ancho (28/28 anchos con "alto distinto" antes de
-   este fix) y todo lo que sigue en la página (patrón, footer) se corre para
-   arriba. Se repone el mismo alto acá en vez de simular dots reales, porque
-   acá no se ven (ver task-5-report.md). Scoping por .colaboradores-logos:
-   proyectos-imgs no lo necesita, tiene alto fijo (250px) con overflow:hidden
-   en su contenedor, así que el mismo hueco fantasma en owl2 nunca fue
-   visible en el alto total de esa página. */
-.carrusel.colaboradores-logos {
-  margin-bottom: 18px;
 }
