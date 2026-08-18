@@ -7,6 +7,7 @@ import Carrusel from '../components/Carrusel.astro';
   descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
   canonica="https://superacionjuvenil.org/"
   carruselCss={true}
+  animacionesCss={true}
 >
   <!-- Contenido extraído con:  sed -n '85,269p' .baseline/index.html  -->
   <!-- (85..294 menos el bloque de footer, que ya se renderiza vía <Footer /> en Base.astro) -->
@@ -203,8 +204,10 @@ import Carrusel from '../components/Carrusel.astro';
 
   <Fragment slot="scripts">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" is:inline></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js" is:inline></script>
-    <script is:inline>AOS.init();</script>
+    <script>
+      import { iniciarAnimaciones } from '../scripts/animaciones.js';
+      iniciarAnimaciones();
+    </script>
     <script src="js/aportar-images.js" is:inline></script>
     <script src="js/carrusel.js" is:inline></script>
     <script src="./js/menu.js" is:inline></script>

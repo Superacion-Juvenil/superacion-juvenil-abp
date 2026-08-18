@@ -7,6 +7,7 @@ import Base from '../layouts/Base.astro';
   mostrarAviso={true}
   verEstilo="1.3"
   seo={false}
+  animacionesCss={true}
 >
   <!-- .baseline/aviso.html es la única página del original cuyo <head> NO
        trae meta description, los og:*/twitter:*, canonical/hreflang/robots,
@@ -80,9 +81,9 @@ import Base from '../layouts/Base.astro';
   <!-- El original NO carga menu.js acá, así que overFlowH() tira ReferenceError al
        abrir el menú hamburguesa. Se replica a propósito: arreglarlo es cambiar el sitio. -->
   <Fragment slot="scripts">
-        <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script is:inline>
-            AOS.init();
+        <script>
+            import { iniciarAnimaciones } from '../scripts/animaciones.js';
+            iniciarAnimaciones();
         </script>
         <script is:inline src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script is:inline src="js/copy.js"></script>

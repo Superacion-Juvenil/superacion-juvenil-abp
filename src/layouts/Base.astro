@@ -27,6 +27,13 @@ interface Props {
   // Solo index.html y proyectos.html traen carrusel (antes owl, ahora el
   // componente propio de Task 5); nosotros/unete/aviso no cargan su CSS.
   carruselCss?: boolean;
+  // index/proyectos/unete/aviso son las 4 páginas que cargaban AOS (ver Task 6).
+  // nosotros.astro no pasa esta prop a propósito: no carga el script de
+  // animaciones (src/scripts/animaciones.js) y por eso sus data-aos no
+  // animan hoy — si acá se cargara igual el CSS, sus 16 elementos quedarían
+  // en opacity:0 para siempre (el CSS los arranca ocultos y solo el
+  // observer de animaciones.js los revela).
+  animacionesCss?: boolean;
 }
 
 const {
@@ -38,6 +45,7 @@ const {
   verEstilo = '3.1',
   seo = true,
   carruselCss = false,
+  animacionesCss = false,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -88,8 +96,8 @@ const {
     )}
 
     <link rel="stylesheet" href={`styles/style.css?ver=${verEstilo}`}>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     {carruselCss && <link rel="stylesheet" href="styles/carrusel.css">}
+    {animacionesCss && <link rel="stylesheet" href="styles/animaciones.css">}
 
     {seo && (
       <script type="application/ld+json" set:html={JSON.stringify({

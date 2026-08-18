@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
   descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
   canonica="https://superacionjuvenil.org/"
   headerFijo={true}
+  animacionesCss={true}
 >
   <Fragment slot="head">
     <script is:inline src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
@@ -154,9 +155,9 @@ import Base from '../layouts/Base.astro';
         </script>
     
     
-        <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script is:inline>
-            AOS.init();
+        <script>
+            import { iniciarAnimaciones } from '../scripts/animaciones.js';
+            iniciarAnimaciones();
         </script>
         <script is:inline src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script is:inline src="js/copy.js"></script>

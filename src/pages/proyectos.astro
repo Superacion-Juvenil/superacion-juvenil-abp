@@ -8,6 +8,7 @@ import Carrusel from '../components/Carrusel.astro';
   canonica="https://superacionjuvenil.org/"
   headerFijo={true}
   carruselCss={true}
+  animacionesCss={true}
 >
   <!-- Contenido extraído con: sed -n '84,196p' .baseline/proyectos.html -->
   <!-- (84..267 menos el footer, que ya se renderiza vía <Footer /> en Base.astro) -->
@@ -132,9 +133,9 @@ import Carrusel from '../components/Carrusel.astro';
 
   <Fragment slot="scripts">
         <script is:inline src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script is:inline>
-            AOS.init();
+        <script>
+            import { iniciarAnimaciones } from '../scripts/animaciones.js';
+            iniciarAnimaciones();
         </script>
         <script is:inline src="js/carrusel.js"></script>
         <script is:inline src="./js/menu.js"></script>
