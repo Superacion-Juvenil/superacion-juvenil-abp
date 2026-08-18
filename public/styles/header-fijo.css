@@ -1,0 +1,159 @@
+/* header-fijo.css — style.css original líneas 3261-3414: segundo bloque de header (reset universal,
+   img, html, #header con position fixed que se oculta/muestra al hacer scroll, .nav-up, .nav-down)
+   con sus media queries y el comentario final tipo sourceMappingURL del original (sin repetir sus
+   delimitadores acá: anidar comentarios CSS cierra el bloque antes de tiempo). En el original va
+   DESPUÉS de las reglas de unete.css: no se reordenó. */
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+img {
+  pointer-events: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#header {
+  width: 100%;
+  height: 120px;
+  position: fixed;
+  background-color: #C2CADC;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 10;
+  top: -120px;
+  width: 100%;
+}
+#header img {
+  width: 180px;
+  margin-top: 20px;
+  margin-left: 3rem;
+}
+#header nav {
+  display: flex;
+  color: #103260;
+  font-size: 15pt;
+  margin: auto;
+  z-index: 1;
+  flex-direction: column;
+}
+#header nav .header-option-desk {
+  margin: 20px;
+  width: 50%;
+  font-family: ApexLight, sans-serif;
+}
+#header nav a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  position: relative;
+}
+#header nav a:not([nav-active=true]):before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -6px;
+  left: 0;
+  background: #5176A0;
+  visibility: hidden;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: 0.3s;
+}
+#header nav a:not([nav-active=true]):hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+#header nav [nav-active=true]::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  bottom: -6px;
+  left: 50%;
+  visibility: visible;
+  border-radius: 5px;
+  transform: scaleX(1) translate(-50%);
+  transition: 0.3s;
+}
+#header nav .header-aportar-desk {
+  text-align: center; /* Center the content horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 66%;
+  height: 2.2rem;
+  color: white;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1rem;
+  margin: auto;
+  background-color: #1B4D87;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.51), 0 6px 20px 0 rgba(0, 0, 0, 0.51);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.nav-up {
+  top: 0px !important;
+  transition: top 0.4s ease-out;
+  width: 100%;
+  overflow: hidden;
+}
+
+.nav-down {
+  top: -120px !important;
+  transition: top 0.4s ease-out;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 850px) {
+  #header .header-option {
+    font-size: 2rem;
+  }
+  #header .header-aportar {
+    font-size: 1.2rem;
+    height: 2rem;
+  }
+}
+@media screen and (max-width: 420px) {
+  .space {
+    height: 105px !important;
+  }
+  #header {
+    height: 105px;
+  }
+  #header img {
+    width: 125px;
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  #header nav .header-aportar-desk {
+    height: 1.7rem;
+    font-size: 0.7rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  #header .header-option {
+    font-size: 1em;
+  }
+  #header .header-aportar {
+    font-size: 1rem;
+    height: 1.8em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+}/*# sourceMappingURL=style.css.map */

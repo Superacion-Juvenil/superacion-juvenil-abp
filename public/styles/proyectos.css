@@ -1,0 +1,760 @@
+/* proyectos.css — style.css original líneas 1801-2555: secciones de proyectos.html (title-proyectos,
+   programa-adol-uni, video-vem, resi-brecha, slider-proyectos/carrusel, eventos-alto, vivamus), con sus
+   media queries intercaladas. El carrusel (.slider-proyectos, .tar1..19, .owl-stage) queda dentro de este
+   archivo y no en uno separado: sus reglas están intercaladas con el resto de proyectos y con su propia
+   media query (línea ~2464 del original), separarlas habría roto la contigüidad. */
+.title-proyectos {
+  width: 100%;
+  height: 100px;
+  background-color: #5176A0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.title-proyectos h1 {
+  font-family: ApexBook, sans-serif;
+  font-size: 2.6rem;
+}
+
+.programa-adol-uni {
+  width: 100%;
+  height: 70vh;
+  background-color: #C2CADC;
+  display: flex;
+}
+.programa-adol-uni .programa-texto {
+  width: 55%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: justify;
+  margin: auto;
+  margin-right: -10%;
+  background-color: #C2CADC;
+  background: linear-gradient(to left, transparent, #C2CADC 8%);
+  z-index: 1;
+}
+.programa-adol-uni .programa-texto h1 {
+  width: 80%;
+  margin-right: auto;
+  font-family: ApexBook, sans-serif;
+  font-size: 2rem;
+  color: #1B4D87;
+}
+.programa-adol-uni .programa-texto p {
+  width: 80%;
+  margin-right: auto;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  padding-top: 1rem;
+}
+.programa-adol-uni .programas-images {
+  width: 45%;
+  height: 100%;
+  margin-left: auto;
+}
+.programa-adol-uni .programas-images .programa-img1 {
+  background-image: url("../assets/fondo-adolescentes.jpg");
+  width: 100%;
+  height: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
+  position: relative;
+}
+.programa-adol-uni .programas-images .programa-img1 img {
+  width: 60%;
+  position: absolute;
+  bottom: 0;
+  left: -30px;
+  height: auto;
+}
+.programa-adol-uni .programas-images .programa-img2 {
+  background-image: url("../assets/fondo-universitarios.jpg");
+  width: 100%;
+  height: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
+  position: relative;
+}
+.programa-adol-uni .programas-images .programa-img2 img {
+  width: 60%;
+  position: absolute;
+  bottom: 0;
+  left: -10px;
+  height: auto;
+}
+.programa-adol-uni .programas-images .label {
+  position: absolute;
+  width: 50%;
+  height: -moz-max-content;
+  height: max-content;
+  bottom: 0;
+  right: 1rem;
+  color: #103260;
+  font-family: Poppins-SemiBold, sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 110%;
+  text-align: right;
+}
+.programa-adol-uni .programas-images .info-blur {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  font-family: ApexBook, sans-serif;
+  font-size: 1rem;
+  color: transparent;
+  text-align: justify;
+  justify-content: center;
+  transition: 200ms -webkit-backdrop-filter linear;
+  transition: 200ms backdrop-filter linear;
+  transition: 200ms backdrop-filter linear, 200ms -webkit-backdrop-filter linear;
+}
+.programa-adol-uni .programas-images .info-blur a {
+  display: none;
+  cursor: default;
+}
+.programa-adol-uni .programas-images .info-blur:hover {
+  background-color: rgba(42, 120, 146, 0.4039215686);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  color: white;
+  cursor: default;
+}
+.programa-adol-uni .programas-images .info-blur:hover a {
+  color: white;
+  text-decoration: none;
+  width: -moz-max-content;
+  width: max-content;
+  margin-left: 5%;
+  margin-right: auto;
+  display: flex;
+}
+.programa-adol-uni .programas-images .info-blur:hover a img {
+  padding-top: 0;
+}
+.programa-adol-uni .programas-images .info-blur:hover a span {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 5px;
+}
+.programa-adol-uni .programas-images .info-blur:hover p {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
+}
+
+.video-vem {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+.video-vem video {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  height: 100%;
+  width: 200vh; /* 100 * 16 / 9 */
+  min-width: 100%;
+  min-height: 56.25vw; /* 100 * 9 / 16 */
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.video-vem .vem-filtro {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 70vh;
+  background-color: rgba(39, 41, 43, 0.4431372549);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+.video-vem .vem-filtro h1 {
+  color: white;
+  font-family: Poppins-SemiBold, sans-serif;
+  font-size: 6rem;
+}
+.video-vem .vem-filtro h2 {
+  color: white;
+  font-family: ApexBook, sans-serif;
+  font-size: 3rem;
+}
+.video-vem .vem-filtro p {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1rem;
+  color: white;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.resi-brecha {
+  width: 100%;
+  height: 55vh;
+  background-color: #1B4D87;
+  display: flex;
+}
+.resi-brecha .resi-b {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.resi-brecha .resi-b h1 {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: ApexBook, sans-serif;
+  font-size: 2rem;
+  color: #C2CADC;
+  padding-top: 5%;
+}
+.resi-brecha .resi-b p {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  padding-top: 1rem;
+  text-align: justify;
+}
+.resi-brecha .r-brecha {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: #C2CADC;
+}
+.resi-brecha .r-brecha h1 {
+  width: 90%;
+  padding-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: ApexBook, sans-serif;
+  font-size: 2rem;
+  color: #1B4D87;
+}
+.resi-brecha .r-brecha p {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  padding-top: 1rem;
+  text-align: justify;
+}
+
+.slider-proyectos {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+}
+.slider-proyectos .proyectos-imgs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+}
+.slider-proyectos .proyectos-imgs .owl-stage {
+  display: flex;
+}
+.slider-proyectos .proyectos-imgs .tar {
+  width: 700px;
+  height: 290px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: -100px;
+  background-position-x: -150px;
+}
+.slider-proyectos .proyectos-imgs .tar1 {
+  background-image: url("../assets/slider-proyectos1.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar2 {
+  background-image: url("../assets/slider-proyectos2.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar3 {
+  background-image: url("../assets/slider-proyectos3.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar4 {
+  background-image: url("../assets/slider-proyectos4.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar5 {
+  background-image: url("../assets/slider-proyectos5.jpg");
+  background-position-y: 0px;
+}
+.slider-proyectos .proyectos-imgs .tar6 {
+  background-image: url("../assets/slider-proyectos6.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar7 {
+  background-image: url("../assets/slider-proyectos7.jpg");
+  background-position-y: 0px;
+  background-position-x: -150px;
+}
+.slider-proyectos .proyectos-imgs .tar8 {
+  background-image: url("../assets/slider-proyectos8.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar10 {
+  background-image: url("../assets/slider-proyectos10.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar11 {
+  background-image: url("../assets/slider-proyectos11.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar12 {
+  background-image: url("../assets/slider-proyectos12.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar13 {
+  background-image: url("../assets/slider-proyectos13.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar14 {
+  background-image: url("../assets/slider-proyectos14.jpg");
+  background-position-x: -80px;
+}
+.slider-proyectos .proyectos-imgs .tar15 {
+  background-image: url("../assets/slider-proyectos15.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar16 {
+  background-image: url("../assets/slider-proyectos16.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar17 {
+  background-image: url("../assets/slider-proyectos17.jpeg");
+}
+.slider-proyectos .proyectos-imgs .tar18 {
+  background-image: url("../assets/slider-proyectos18.jpg");
+}
+.slider-proyectos .proyectos-imgs .tar19 {
+  background-image: url("../assets/slider-proyectos19.jpg");
+}
+
+.eventos-alto {
+  display: flex;
+  width: 100%;
+  height: 70vh;
+  background-color: #5176A0;
+}
+.eventos-alto .eventos1 {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.eventos-alto .eventos1 .contigo22 {
+  background-image: url("../assets/FotoContigo.webp");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: bottom;
+}
+.eventos-alto .eventos2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+}
+.eventos-alto .eventos2 .eventos-title {
+  width: 90%;
+  font-family: Poppins-SemiBold, sans-serif;
+  font-size: 2rem;
+  color: #9C5227;
+  padding-bottom: 1rem;
+  font-weight: bolder;
+}
+.eventos-alto .eventos2 .eventos-text {
+  width: 90%;
+  height: -moz-max-content;
+  height: max-content;
+  text-align: justify;
+  font-family: Poppins-Regular, sans-serif;
+  color: #9C5227;
+  font-size: 1.2rem;
+}
+.eventos-alto .eventos2 .eventos-text b {
+  font-family: Poppins-SemiBold, sans-serif;
+}
+
+/* ===== Festival Vivamus (ajustado: más aire y texto mayor) ===== */
+.vivamus {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem; /* más espacio entre columnas */
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem); /* más padding vertical */
+  /* ------- Columna izquierda ------- */
+  /* ------- Columna derecha ------- */
+}
+.vivamus .logo-text,
+.vivamus .vivamus-media {
+  flex: 1 1 480px;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem; /* un poco más de aire entre elementos */
+}
+.vivamus .logo-text {
+  text-align: center;
+  color: #103260;
+  font-family: Poppins-Regular, sans-serif;
+}
+.vivamus .logo-text .vivamus-logo {
+  width: 100%;
+  max-width: clamp(180px, 45vw, 420px);
+  height: auto;
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+}
+.vivamus .logo-text h1 {
+  font-family: Poppins-SemiBold, sans-serif;
+  font-size: clamp(1.25rem, 3vw, 2.3rem); /* +15% */
+  line-height: 1.3;
+  margin: 0.6rem auto 0;
+  color: #103260;
+  width: min(80%, 48ch);
+}
+.vivamus .logo-text p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem); /* +10% */
+  line-height: 1.6;
+  margin: 0.6rem auto 0;
+  width: min(80%, 60ch);
+}
+.vivamus .vivamus-media {
+  align-items: center;
+}
+.vivamus .vivamus-media iframe,
+.vivamus .vivamus-media .vivamus-img {
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16/9;
+  height: auto;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 27%;
+     object-position: 50% 27%;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+.vivamus .vivamus-media .vivamus-redes {
+  width: 100%;
+  max-width: 720px;
+  margin: 1rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.vivamus .vivamus-media .vivamus-redes h3 {
+  margin: 0;
+  font-family: ApexBook, sans-serif;
+  color: #103260;
+}
+.vivamus .vivamus-media .vivamus-redes h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.vivamus .vivamus-media .vivamus-redes #web-vivamus {
+  font-family: ApexMedium, sans-serif;
+  padding: 12px 18px;
+  color: white;
+  text-decoration: none;
+  background-color: #62A675;
+  border-radius: 20px;
+  display: inline-block;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.31), 0 6px 20px rgba(0, 0, 0, 0.31);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+}
+
+/* ===== Layout de dos columnas desde 900px ===== */
+@media (min-width: 900px) {
+  .vivamus {
+    flex-wrap: nowrap;
+    gap: 3.5rem; /* un poco más de aire */
+    padding-block: clamp(2.5rem, 5vw, 5rem);
+  }
+  .vivamus .logo-text,
+  .vivamus .vivamus-media {
+    flex: 1 1 50%;
+    max-width: none;
+  }
+  .vivamus .logo-text {
+    text-align: left;
+  }
+  .vivamus .logo-text .vivamus-logo {
+    margin-inline: 0;
+    max-width: 360px; /* un poco más grande en desktop */
+  }
+  .vivamus .logo-text h1,
+  .vivamus .logo-text p {
+    margin-left: 0;
+    margin-right: 0;
+    width: 80%;
+  }
+  .vivamus .vivamus-media {
+    align-items: center;
+  }
+  .vivamus .vivamus-media .vivamus-redes {
+    justify-content: flex-start;
+  }
+}
+@media screen and (max-width: 912px) {
+  .video-vem video {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    min-height: 56.25vw;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+  }
+}
+/* === Arreglo específico 481–840px === */
+@media screen and (min-width: 481px) and (max-width: 840px) {
+  .eventos-alto {
+    /* en este rango, deja que el alto se adapte al contenido */
+    height: auto; /* <- antes 70/60vh */
+    align-items: stretch;
+  }
+  .eventos-alto .eventos1,
+  .eventos-alto .eventos2 {
+    width: 50%;
+  }
+  .eventos-alto .eventos2 {
+    /* evita que el padding + 90% se salga */
+    box-sizing: border-box;
+    padding: 0.75rem 0 1rem;
+  }
+  .eventos-alto .eventos2 .eventos-title {
+    width: 92%;
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem); /* baja ligeramente en este rango */
+    padding-bottom: 0.75rem;
+  }
+  .eventos-alto .eventos2 .eventos-text {
+    width: 92%;
+    font-size: clamp(0.95rem, 2vw, 1.05rem); /* texto apenas más compacto */
+    line-height: 1.5;
+  }
+  /* asegura que la imagen de fondo tenga presencia cuando la altura es auto */
+  .eventos-alto .eventos1 .contigo22 {
+    min-height: 260px; /* evita que colapse si el texto es corto */
+  }
+}
+/* Ajuste leve del breakpoint previo (no romperá desktop) */
+@media screen and (max-width: 820px) {
+  .eventos-alto {
+    height: auto; /* en lugar de 60vh que causaba overflow */
+    min-height: 60vh; /* mantiene una presencia visual razonable */
+  }
+}
+@media screen and (max-width: 480px) {
+  .title-proyectos h1 {
+    font-size: 2rem;
+  }
+  .programa-adol-uni {
+    height: 100vh;
+    flex-direction: column;
+  }
+  .programa-adol-uni .programa-texto {
+    width: 100%;
+    background-color: #C2CADC;
+    margin-left: 0;
+    height: 120%;
+    margin-bottom: -7%;
+    background: linear-gradient(to top, transparent, #C2CADC 16%);
+  }
+  .programa-adol-uni .programa-texto h1 {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.3rem;
+  }
+  .programa-adol-uni .programa-texto p {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    font-size: 0.8rem;
+  }
+  .programa-adol-uni .programas-images {
+    width: 100%;
+  }
+  .programa-adol-uni .programas-images .programa-img1 img {
+    width: 40%;
+  }
+  .programa-adol-uni .programas-images .programa-img2 {
+    background-color: white;
+  }
+  .programa-adol-uni .programas-images .programa-img2 img {
+    width: 40%;
+  }
+  .video-vem .vem-filtro h1 {
+    font-size: 2.5rem;
+  }
+  .video-vem .vem-filtro h2 {
+    font-size: 2rem;
+  }
+  .video-vem .vem-filtro p {
+    width: 80%;
+    font-size: 0.8rem;
+  }
+  .resi-brecha {
+    display: flex;
+    flex-direction: column;
+    height: 120vh;
+  }
+  .resi-brecha .resi-b {
+    width: 100%;
+    justify-content: center;
+    text-align: justify;
+  }
+  .resi-brecha .resi-b p {
+    width: 90%;
+    font-size: 0.8rem;
+  }
+  .resi-brecha .r-brecha {
+    justify-content: center;
+    width: 100%;
+    text-align: justify;
+  }
+  .resi-brecha .r-brecha p {
+    width: 90%;
+    font-size: 0.8rem;
+  }
+  .slider-proyectos {
+    height: 300px;
+  }
+  .slider-proyectos .proyectos-imgs {
+    height: 100%;
+  }
+  .slider-proyectos .proyectos-imgs .tar1 {
+    height: 100%;
+  }
+  .eventos-alto {
+    height: 100vh;
+    flex-direction: column-reverse;
+  }
+  .eventos-alto .eventos1 {
+    width: 100%;
+    height: 30%;
+  }
+  .eventos-alto .eventos1 .contigo22 {
+    width: 100%;
+    height: 100%;
+  }
+  .eventos-alto .eventos2 {
+    width: 100%;
+    height: 70%;
+  }
+  .eventos-alto .eventos2 .eventos-title {
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    width: 80%;
+  }
+  .eventos-alto .eventos2 .eventos-text {
+    width: 80%;
+    font-size: 1rem;
+    padding-bottom: 1rem;
+  }
+  .proy-conferencia {
+    height: 130vh;
+    flex-direction: column-reverse;
+  }
+  .proy-conferencia .confe {
+    width: 100%;
+    height: 60%;
+  }
+  .proy-conferencia .confe h1 {
+    margin-left: auto;
+    margin-right: a;
+  }
+  .proy-conferencia .confe p {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 0.8rem;
+  }
+  .proy-conferencia .confe .collage {
+    margin-left: 0;
+    margin-right: 0;
+    background-position: center;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 0;
+  }
+  .proy-conferencia .cinecausa {
+    width: 100%;
+    height: 40%;
+  }
+  .proy-conferencia .cinecausa h1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .proy-conferencia .cinecausa p {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 430px) {
+  .programa-adol-uni {
+    height: 90vh;
+  }
+}
+@media screen and (max-width: 375px) {
+  .title-proyectos {
+    height: 60px;
+  }
+  .title-proyectos h1 {
+    font-size: 1.5rem;
+  }
+  .programa-adol-uni {
+    height: 100vh;
+  }
+  .eventos-alto .eventos2 {
+    height: 80%;
+  }
+  .eventos-alto .eventos2 .eventos-text {
+    font-size: 0.7rem;
+  }
+}
