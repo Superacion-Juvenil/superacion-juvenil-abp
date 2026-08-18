@@ -1,87 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <!-- Meta tags for sharing web -->
-    <title>Superación Juvenil ABP</title>
-    <meta name="title" content="Superación Juvenil ABP" />
-    <meta name="description" content="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad." />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://metatags.io/" />
-    <meta property="og:title" content="Superación Juvenil ABP" />
-    <meta property="og:description" content="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad." />
-    <meta property="og:image" content="assets/SJ-2.jpg" />
-
-    <!-- X (Twitter) -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://metatags.io/" />
-    <meta property="twitter:title" content="Superación Juvenil ABP" />
-    <meta property="twitter:description" content="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad." />
-    <meta property="twitter:image" content="assets/SJ-2.jpg" />
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#023b63"><!-- Color Pestaña -->
-    <!-- <link rel="icon" href="assets/favicon.png"> <---Favicon -->
-    
-    <link rel="canonical" href="https://superacionjuvenil.org/">
-    <link rel="alternate" hreflang="es-MX" href="https://superacionjuvenil.org/">
-    <meta name="robots" content="index, follow">
-    <meta property="og:site_name" content="Superación Juvenil ABP">
-    <meta property="og:locale" content="es_MX">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="1200">
-
-    <!-- Estilos -->
-    <link rel="stylesheet" href="styles/style.css?ver=3.1">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-    <link rel="stylesheet" href="owl/owl.carousel.min.css">
-
-    <script type="application/ld+json">
-        {
-        "@context": "https://schema.org",
-        "@type": "NonprofitOrganization",
-        "name": "Superación Juvenil ABP",
-        "url": "https://superacionjuvenil.org/",
-        "logo": "https://superacionjuvenil.org/assets/logo-sj.png"
-        }
-    </script>
-
- 
-</head>
-<body>
-    <input type="checkbox" id="menu-chk" style="display: none;"><!-- Este es un checkbox para ver si está activo o no para deslizar el nav -->
-        <label id="dim-menu-close" for="menu-chk" onclick="overFlowV()"></label>
-        <!-- Este es un label que sirve para cerrar el menu también, es una barrita que oscurece el espacio visible cuando se abre el menú -->
-        <!-- Aqui se llama a overFlowV() para que cuando se abra el menu SI se pueda seguir deslizando -->
-
-    <header id="header" class="nav-up">
-        <label class="menu-icon" for="menu-chk" onclick="overFlowH()">
-            <div class="bar-menu-icon"></div>
-            <div class="bar-menu-icon"></div>
-            <div class="bar-menu-icon"></div>
-        </label>
-
-        <a home-link="true" id="img-hover" href="/index.html">
-            <img class="header-img" src="assets/LOGO SJ PANTONES-03.png" alt="ABP_LOGO">
-        </a>
-        <nav>
-            <div class="header-option"><a href="index.html">Inicio</a></div>
-            <div class="header-option"><a href="nosotros.html">Nosotros</a></div>
-            <div class="header-option"><a href="proyectos.html">Proyectos</a></div>
-            <div class="header-aportar"><a href="unete.html">Aportar a la causa</a></div>
-        </nav>
-
-        <div class="nav-desk">
-            <div class="header-option-desk"><a href="index.html">Inicio</a></div>
-            <div class="header-option-desk"><a href="nosotros.html">Nosotros</a></div>
-            <div class="header-option-desk"><a href="proyectos.html">Proyectos</a></div>
-            <div class="header-aportar-desk"><a href="unete.html">Aportar a la causa</a></div>
-        </div>
-        
-    </header>
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  titulo="Superación Juvenil ABP"
+  descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
+  canonica="https://superacionjuvenil.org/"
+>
+  <!-- Contenido extraído con:  sed -n '85,269p' .baseline/index.html  -->
+  <!-- (85..294 menos el bloque de footer, que ya se renderiza vía <Footer /> en Base.astro) -->
 
     <div id="aportar-images" class="aportar aportar-image1">
         <div class="aportar-center">
@@ -268,42 +194,14 @@
         </div>
     </div>
 
-    <div class="footer">
-        <div class="footer-logo">
-            <img class="header-img" src="assets/LOGOSJPANTONES-04.png" alt="ABP_LOGO">
-        </div>
-
-        <!-- <div class="footer-menu">
-            <a href="/">Inicio</a>
-            <a href="/">Nosotros</a>
-            <a href="/">Programas</a>
-            <a href="/">Proyectos</a>
-            <a href="/">Únete</a>
-        </div> -->
-
-        <div class="footer-contacto">
-            <div class="contacto-title">Contacto</div>
-            <div class="contacto-tel">Tel: (81)1352 5333 ext. 106 y 108</div>
-            <div class="contacto-correo">desarrollo@superacionjuvenil.org</div>
-            <div class="contacto-redes">
-                <a href="https://www.facebook.com/superacionjuvenilabp/" target="_blank" style="padding-top:43px"><img src="./assets/facebook.svg" alt="Facebook logo" style="width: 54px; padding-bottom: 2px;" loading="lazy"></a>
-                <a href="https://www.instagram.com/superacionjuvenil/" target="_blank" style="padding-top:43px"><img src="./assets/instagram.svg" alt="Instagram logo" loading="lazy"></a>
-            </div>
-        </div>
-    </div>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-
-    <!-- <script src="js/header-scroll.js"></script> -->
-    <script src="js/aportar-images.js"></script>
-
-    <script src="owl/owl.carousel.min.js"></script>
-    <script>
+  <Fragment slot="scripts">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" is:inline></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js" is:inline></script>
+    <script is:inline>AOS.init();</script>
+    <script src="js/aportar-images.js" is:inline></script>
+    <script src="owl/owl.carousel.min.js" is:inline></script>
+    <!-- Inline de owl, extraído con: sed -n '307,339p' .baseline/index.html -->
+    <script is:inline>
         $(document).ready(function(){
             $(".owl-carousel").owlCarousel();
         });
@@ -338,7 +236,7 @@
         
         
     </script>
-    <script src="./js/menu.js"></script>
-    <script src="./js/header-scroll.js"></script>
-</body>
-</html>
+    <script src="./js/menu.js" is:inline></script>
+    <script src="./js/header-scroll.js" is:inline></script>
+  </Fragment>
+</Base>
