@@ -6,15 +6,17 @@
 // numImages/cont del original son vestigiales: llevan una cuenta que nunca se usa
 // para decidir a qué clase pasar (el ciclo lo define únicamente la cadena de
 // if/else sobre la clase actual), así que no se portan acá.
+// Task 8 reencodeó estos backgrounds de PNG a WebP (scripts/optimizar-imagenes.mjs):
+// las rutas acá tienen que seguir esa extensión o las 8 precargas dan 404.
 const IMAGENES = [
-  '../assets/FC4-01.png',
-  '../assets/FC1-01.png',
-  '../assets/FC2-01.png',
-  '../assets/FC3-01.png',
-  '../assets/FV1-01.png',
-  '../assets/FV3-01.png',
-  '../assets/FV2-01.png',
-  '../assets/FV4-01.png',
+  '../assets/FC4-01.webp',
+  '../assets/FC1-01.webp',
+  '../assets/FC2-01.webp',
+  '../assets/FC3-01.webp',
+  '../assets/FV1-01.webp',
+  '../assets/FV3-01.webp',
+  '../assets/FV2-01.webp',
+  '../assets/FV4-01.webp',
 ];
 
 const SIGUIENTE_CLASE = {
@@ -30,7 +32,14 @@ function precargar(urls) {
       (url) =>
         new Promise((resolve) => {
           const img = new Image();
+          // onerror también resuelve (no rechaza): si a alguna imagen le
+          // pasa algo (404, red, lo que sea) no hay que dejar la rotación
+          // del hero muerta para siempre. Promise.all esperaba solo onload;
+          // un solo 404 dejaba esa promesa colgada y setInterval nunca se
+          // instalaba (bug real de Task 8: las rutas quedaron en .png
+          // después de reencodear a .webp, y esto lo dejó pasar en silencio).
           img.onload = resolve;
+          img.onerror = resolve;
           img.src = url;
         })
     )

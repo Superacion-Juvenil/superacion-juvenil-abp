@@ -47,9 +47,23 @@ const CSS_CONGELAR = `
 // sección, que no varía entre ambos lados).
 const SELECTOR_CARRUSELES = '.owl-carousel, .owl-carousel2, [data-carrusel]';
 
-async function capturar(page, url, ancho) {
+async function capturar(page, url, ancho, urlsRotas) {
   await page.setViewportSize({ width: ancho, height: 900 });
+
+  // Junta las URLs de subrecursos (imágenes, CSS, JS — cualquier cosa que el
+  // documento pida) que respondan >=400. Se registra ANTES del goto y se
+  // saca después de la captura para no arrastrar respuestas de otras
+  // páginas. Se acumula en un Set por (página, lado) que pasa el caller,
+  // así una misma URL rota vista en varios anchos (p. ej. una entrada de
+  // srcset) cuenta una sola vez.
+  const alRecibirRespuesta = (respuesta) => {
+    if (respuesta.status() >= 400) urlsRotas.add(respuesta.url());
+  };
+  page.on('response', alRecibirRespuesta);
+
   const respuesta = await page.goto(url, { waitUntil: 'networkidle' });
+  page.off('response', alRecibirRespuesta);
+
   // page.goto no lanza ante un 4xx/5xx (solo ante errores de red), así que hay que
   // revisar el status a mano. Si no, una página rota que responde igual en ambos
   // lados (p. ej. un 404 idéntico) pasa la comparación de píxeles sin que nadie
@@ -78,6 +92,47 @@ async function capturar(page, url, ancho) {
     }
     window.scrollTo(0, 0);
   });
+  // Fuerza a que TODAS las <img loading="lazy"> terminen de cargar antes de
+  // la captura, en vez de confiar en que el navegador las dispare solo.
+  // Chrome decide cuándo pedir una imagen lazy según una distancia al
+  // viewport que depende de su estimación de velocidad de conexión — un
+  // heurístico global del proceso del navegador, no por origen. Al alternar
+  // BASE y CAND (un sitio con PNGs pesados, el otro con WebP livianos) en la
+  // misma page, esa estimación fluctúa de una navegación a la otra, así que
+  // a veces una imagen lazy que está cerca del borde de esa distancia carga
+  // a tiempo para la captura y a veces no — un mismo par de páginas daba
+  // 0,46% o 0,68% de diferencia según la corrida, sin que cambiara una sola
+  // línea de código (encontrado con 6 corridas seguidas sobre el mismo
+  // build). Cambiar el atributo `loading` a "eager" en tiempo de ejecución
+  // dispara la carga inmediatamente sin depender de esa heurística — no es
+  // lo mismo que sacar loading="lazy" del sitio real (eso lo dejamos como
+  // está), es solo asegurar que la captura vea el estado final ya asentado.
+  // No alcanza con esperar a `complete`: eso se pone en true apenas termina
+  // la descarga, no cuando el bitmap ya está decodificado y listo para
+  // pintar. Con solo `complete`, en la práctica algunas de las <Image> de
+  // Task 8 (los tres thumbnails de .historia) llegaban "cargadas" pero
+  // pintaban en blanco en la captura — el decode todavía no había corrido.
+  // `img.decode()` espera exactamente a eso.
+  await page.evaluate(async () => {
+    const lazies = [...document.querySelectorAll('img[loading="lazy"]')];
+    lazies.forEach((img) => { img.loading = 'eager'; });
+    await Promise.all(
+      lazies.map(async (img) => {
+        if (!img.complete) {
+          await new Promise((resolve) => {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+          });
+        }
+        try {
+          await img.decode();
+        } catch {
+          // Imagen rota (404, etc.): no hay nada que decodificar. El chequeo
+          // de recursos >=400 más abajo es el que tiene que agarrar esto.
+        }
+      })
+    );
+  });
   const mascaras = await page.locator(SELECTOR_CARRUSELES).locator('xpath=..').all();
   const buffer = await page.screenshot({ fullPage: true, animations: 'disabled', mask: mascaras });
   return { buffer };
@@ -85,20 +140,67 @@ async function capturar(page, url, ancho) {
 
 const navegador = await chromium.launch();
 const page = await navegador.newPage();
+
+// Anula IntersectionObserver y setInterval ANTES de que corra cualquier
+// script de la página (se necesita addInitScript, no page.evaluate: tiene
+// que existir antes de que animaciones.js/contador.js/header-scroll.js lo
+// usen). Esto arregla una falla intermitente real que costó bastante
+// diagnosticar: la animación de los contadores (.count-up2, "A lo largo de
+// nuestra historia...") puede volver a dispararse DESPUÉS del forzado a
+// data-val de más abajo, pisándolo con un valor a mitad de cuenta —
+// mismo build, mismas dos páginas, 0,46% o 0,68% de diferencia según en
+// qué momento exacto cayera la carrera (reproducido con 6 corridas
+// seguidas sobre el mismo build, sin tocar una sola línea de código).
+//
+// Los dos lados lo disparan por vías DISTINTAS, así que hace falta anular
+// las dos:
+//   - CAND (contador.js) usa IntersectionObserver sobre .historia.
+//   - BASE (el original, .baseline/js/header-scroll.js) usa un poller
+//     jQuery: setInterval cada 50ms que revisa scrollTop contra la
+//     posición de .historia y llama startCounter() la primera vez que la
+//     cruza. Un screenshot fullPage puede scrollear la página lo suficiente
+//     como para cruzar ese umbral en medio de la captura.
+// anular setInterval de paso también insensibiliza cualquier otro timer
+// periódico de la página (la rotación del hero, el autoplay del carrusel)
+// ante timing de captura — no hace falta que seau efectivos: compare.mjs ya
+// fuerza a mano el estado que le importa a cada uno (aportar-image1 acá
+// abajo; los carruseles se enmascaran en vez de compararse).
+await page.addInitScript(() => {
+  window.IntersectionObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+  window.setInterval = () => 0;
+});
 await mkdir('visual/diffs', { recursive: true });
 
 const fallas = [];
 const avisos = [];
 let comparadas = 0;
 
+// Un Set de URLs rotas (status >=400) por página y por lado, acumulado a
+// través de todos los anchos probados. Al final se compara el tamaño de cada
+// par: si CAND tiene más recursos rotos que BASE en una página, es una
+// regresión real (imagen movida/renombrada sin actualizar todas sus
+// referencias, script pidiendo una ruta vieja, etc.) y el arnés falla, aunque
+// el diff de píxeles no la vea (p. ej. un background-image que quedó vacío
+// puede no mover ni un píxel del layout). Se compara CAND contra BASE, no
+// contra cero: el sitio original tiene su propio 404 conocido y legítimo
+// (LOGOSJPANTONES-04_2263.png, referenciado en un srcset manual que nunca
+// se generó), así que exigir cero recursos rotos en absoluto haría fallar el
+// arnés contra el propio original.
+const urlsRotasPorPagina = new Map(PAGINAS.map((p) => [p, { base: new Set(), cand: new Set() }]));
+
 for (const pagina of PAGINAS) {
+  const rotas = urlsRotasPorPagina.get(pagina);
   for (const ancho of ANCHOS) {
-    const capturaA = await capturar(page, `${BASE}/${pagina}`, ancho);
+    const capturaA = await capturar(page, `${BASE}/${pagina}`, ancho, rotas.base);
     if (capturaA.error) {
       fallas.push(`${pagina} @${ancho}px: BASE — ${capturaA.error}`);
       continue;
     }
-    const capturaB = await capturar(page, `${CAND}/${pagina}`, ancho);
+    const capturaB = await capturar(page, `${CAND}/${pagina}`, ancho, rotas.cand);
     if (capturaB.error) {
       fallas.push(`${pagina} @${ancho}px: CAND — ${capturaB.error}`);
       continue;
@@ -129,8 +231,22 @@ for (const pagina of PAGINAS) {
   }
 }
 
+for (const [pagina, { base, cand }] of urlsRotasPorPagina) {
+  if (cand.size > base.size) {
+    const nuevas = [...cand].filter((u) => !base.has(u));
+    fallas.push(
+      `${pagina}: CAND tiene ${cand.size} recursos con status >=400 (BASE tiene ${base.size}) — ` +
+      `nuevos: ${nuevas.join(', ')}`
+    );
+  }
+}
+
 await navegador.close();
 
+console.log(`recursos rotos (status >=400) por página — BASE / CAND:`);
+for (const [pagina, { base, cand }] of urlsRotasPorPagina) {
+  console.log(`  ${pagina}: ${base.size} / ${cand.size}`);
+}
 console.log(`comparadas: ${comparadas}/${PAGINAS.length * ANCHOS.length}`);
 console.log(`fallas: ${fallas.length}`);
 for (const f of fallas) console.log('  !', f);
