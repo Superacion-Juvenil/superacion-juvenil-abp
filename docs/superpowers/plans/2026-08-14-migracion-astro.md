@@ -15,7 +15,7 @@
 - **Umbral de fidelidad:** una comparación falla si difiere más del **0,5%** de los pixeles.
 - **Breakpoints obligatorios** (los 28 del CSS): 320, 360, 375, 400, 420, 430, 480, 481, 500, 600, 657, 700, 767, 800, 820, 840, 850, 900, 912, 913, 950, 1000, 1024, 1200, 1280, 1290, 1455, 1590.
 - **Páginas:** `index.html`, `nosotros.html`, `proyectos.html`, `unete.html`, `aviso.html`.
-- **Quirks que se preservan** (ver spec): `nosotros` no carga scripts y sus `data-aos` no animan; `unete` y `aviso` no cargan `menu.js`; `zoom-up`/`zoom-down` no animan; el contador `.count-up2` solo corre en `index`.
+- **Quirks que se preservan** (ver spec): `nosotros` no carga scripts y sus `data-aos` no animan; `unete` y `aviso` no cargan `menu.js`; el contador `.count-up2` solo corre en `index`. (Corregido 2026-08-18: `zoom-up`/`zoom-down` SÍ animan en el original — AOS usa una regla de prefijo. No es un quirk.)
 - **Cada quirk replicado lleva un comentario en el código** explicando que es intencional.
 - **Ningún paso toca el DNS de `superacionjuvenil.org`.** Eso es una decisión posterior y explícita del dueño.
 - **Idioma:** el código y los comentarios se escriben en español, como el resto del repo.
