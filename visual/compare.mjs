@@ -8,7 +8,18 @@ const ANCHOS = [320, 360, 375, 400, 420, 430, 480, 481, 500, 600, 657, 700, 767,
                 820, 840, 850, 900, 912, 913, 950, 1000, 1024, 1200, 1280, 1290, 1455, 1590];
 const BASE = process.env.BASE_URL ?? 'http://localhost:4001';
 const CAND = process.env.CAND_URL ?? 'http://localhost:4002';
-const TOLERANCIA = 0.005; // 0,5% de pixeles
+
+// Umbral de falla dura: por encima de esto el arnés falla (exit code 1).
+// Es el umbral original del arnés, elegido para tolerar ruido de renderizado
+// (antialiasing, subpíxeles) sin dejar pasar regresiones grandes.
+const UMBRAL_FALLA = 0.005; // 0,5% de píxeles
+
+// Umbral de aviso: por encima de esto (pero por debajo de UMBRAL_FALLA) el arnés
+// reporta la comparación como aviso, sin fallar. Se agregó después de que dos
+// regresiones visuales reales (0,29% y 0,37% — entre ellas una franja oscura de
+// 18px a todo el ancho de la página) pasaran desapercibidas por quedar debajo del
+// 0,5%. Las encontró una persona midiendo geometría a mano, no el arnés.
+const UMBRAL_AVISO = 0.0005; // 0,05% de píxeles
 
 // Congela todo lo que se mueve solo: si no, dos capturas del MISMO sitio ya difieren.
 const CSS_CONGELAR = `
@@ -21,6 +32,19 @@ const CSS_CONGELAR = `
 
 // Los carruseles se enmascaran en vez de compararse: owl clona los items para el loop,
 // así que su DOM nunca va a coincidir con el del reemplazo. Se verifican a mano.
+//
+// Se enmascara el PADRE de estos selectores, no el carrusel en sí: el alto del
+// elemento owl-carousel original y el del [data-carrusel] del reemplazo no
+// coinciden exactamente (difieren ~18px en .colaboradores de index.html), así
+// que enmascarar el carrusel deja una franja sin cubrir en el lado con la caja
+// más chica — ahí no hay ninguna diferencia visual real (verificado comparando
+// las capturas completas sin ninguna máscara: 0 píxeles distintos), pero al
+// quedar fuera de la máscara, esa franja se compara igual y el arnés la marca
+// como aviso. El contenedor padre (.colaboradores, .slider-proyectos) sí mide
+// exactamente igual en ambos lados porque su tamaño lo define el CSS de la
+// página, no el carrusel — enmascararlo completo evita el hueco sin agrandar
+// el área no verificada más de lo necesario (agrega como mucho el título de la
+// sección, que no varía entre ambos lados).
 const SELECTOR_CARRUSELES = '.owl-carousel, .owl-carousel2, [data-carrusel]';
 
 async function capturar(page, url, ancho) {
@@ -41,7 +65,7 @@ async function capturar(page, url, ancho) {
     document.querySelectorAll('.count-up2').forEach((el) => {
       el.textContent = el.getAttribute('data-val') ?? el.textContent;
     });
-    // El hero de "unete" (#aportar-images) rota el fondo cada 5s vía setInterval
+    // El hero de "index" (#aportar-images) rota el fondo cada 5s vía setInterval
     // (no vía CSS animation, así que CSS_CONGELAR no lo frena). Se detiene el
     // temporizador y se fuerza siempre la misma imagen (la inicial, aportar-image1).
     if (window.jQuery) {
@@ -54,7 +78,7 @@ async function capturar(page, url, ancho) {
     }
     window.scrollTo(0, 0);
   });
-  const mascaras = await page.locator(SELECTOR_CARRUSELES).all();
+  const mascaras = await page.locator(SELECTOR_CARRUSELES).locator('xpath=..').all();
   const buffer = await page.screenshot({ fullPage: true, animations: 'disabled', mask: mascaras });
   return { buffer };
 }
@@ -64,6 +88,7 @@ const page = await navegador.newPage();
 await mkdir('visual/diffs', { recursive: true });
 
 const fallas = [];
+const avisos = [];
 let comparadas = 0;
 
 for (const pagina of PAGINAS) {
@@ -92,10 +117,14 @@ for (const pagina of PAGINAS) {
     const proporcion = distintos / (a.width * a.height);
     comparadas++;
 
-    if (proporcion > TOLERANCIA) {
+    if (proporcion > UMBRAL_FALLA) {
       const ruta = `visual/diffs/${pagina.replace('.html', '')}-${ancho}.png`;
       await writeFile(ruta, PNG.sync.write(diff));
       fallas.push(`${pagina} @${ancho}px: ${(proporcion * 100).toFixed(2)}% distinto → ${ruta}`);
+    } else if (proporcion > UMBRAL_AVISO) {
+      const ruta = `visual/diffs/aviso-${pagina.replace('.html', '')}-${ancho}.png`;
+      await writeFile(ruta, PNG.sync.write(diff));
+      avisos.push(`${pagina} @${ancho}px: ${(proporcion * 100).toFixed(2)}% → ${ruta}`);
     }
   }
 }
@@ -105,4 +134,10 @@ await navegador.close();
 console.log(`comparadas: ${comparadas}/${PAGINAS.length * ANCHOS.length}`);
 console.log(`fallas: ${fallas.length}`);
 for (const f of fallas) console.log('  !', f);
+console.log(`avisos: ${avisos.length}  (superan 0,05% pero no llegan al umbral de falla)`);
+for (const a of avisos) console.log('  ~', a);
+
+// El código de salida depende solo de las fallas duras: los avisos nunca hacen
+// fallar el arnés (si lo hicieran, Task 8 — reencode de imágenes, que sube el
+// ruido de píxeles por debajo del umbral de falla — se volvería imposible de pasar).
 process.exit(fallas.length ? 1 : 0);
