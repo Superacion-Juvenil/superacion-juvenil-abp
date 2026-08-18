@@ -33,6 +33,14 @@ html {
 }
 #header img {
   width: 180px;
+  /* height:auto explícito (Task 8): el <img> original no traía atributos
+     width/height, así que el alto quedaba "auto" de por sí. astro:assets
+     SIEMPRE agrega width/height al <img> generado (para reservar espacio y
+     evitar CLS); si acá no se declara height, esos atributos ganan la
+     cascada como pista presentacional y el navegador renderiza el logo a su
+     alto natural en vez de escalarlo con el ancho. Sin este fix el header
+     se agranda a la altura completa de la imagen fuente. */
+  height: auto;
   margin-top: 20px;
   margin-left: 3rem;
 }

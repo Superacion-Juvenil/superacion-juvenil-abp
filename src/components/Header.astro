@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoHeader from '../assets/LOGO SJ PANTONES-03.png';
+
 interface Props { fijo?: boolean }
 const { fijo = false } = Astro.props;
 ---
@@ -10,7 +13,7 @@ const { fijo = false } = Astro.props;
     </label>
 
     <a home-link="true" id="img-hover" href="/index.html">
-        <img class="header-img" src="assets/LOGO SJ PANTONES-03.png" alt="ABP_LOGO">
+        <Image class="header-img" src={logoHeader} alt="ABP_LOGO" quality={82} />
     </a>
     <nav>
         <div class="header-option"><a href="index.html">Inicio</a></div>

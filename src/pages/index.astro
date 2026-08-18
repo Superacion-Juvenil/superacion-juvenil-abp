@@ -1,6 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Carrusel from '../components/Carrusel.astro';
+import logoAportar from '../assets/LOGOSJPANTONES-04.png';
+import iconoValores1 from '../assets/iconos web-01.png';
+import iconoValores2 from '../assets/iconos web-02.png';
+import iconoValores3 from '../assets/iconos web-03.png';
+import iconoValores4 from '../assets/iconos web-04.png';
+import iconoValores5 from '../assets/iconos web-05.png';
+import iconoValores6 from '../assets/iconos web-06.png';
+import programaBrecha from '../assets/programa-brecha.webp';
+import programaConferencia from '../assets/programa-conferencia.webp';
+import programaVerano from '../assets/programa-verano.webp';
+import logoPatron from '../assets/logo-secretaria-igualdad-inclusion.png';
 ---
 <Base
   titulo="Superación Juvenil ABP"
@@ -14,22 +26,25 @@ import Carrusel from '../components/Carrusel.astro';
 
     <div id="aportar-images" class="aportar aportar-image1">
         <div class="aportar-center">
-            <!-- 256×110, 1320×566, 1850×794, 2263×971 -->
-            <img srcset="
-                    ./assets/LOGOSJPANTONES-04_256.png 256w,
-                    ./assets/LOGOSJPANTONES-04_1320.png 1320w,
-                    ./assets/LOGOSJPANTONES-04_1850.png 1850w,
-                    ./assets/LOGOSJPANTONES-04_2263.png 2263w,
-                "
-                sizes="(min-width: 1860px) 720px, 
-                (min-width: 1300px) 800px, 
-                (min-width: 820px) 750px, 
-                (min-width: 660px) 600px, 
-                (min-width: 500px) 400px, 
+            <!-- srcset generado por astro:assets (Task 8). El original tenía una cuarta
+                 variante manual, LOGOSJPANTONES-04_2263.png, que daba 404 en el sitio en
+                 vivo (nunca se generó): a propósito no se agrega 2263 a `widths` para no
+                 "arreglar" ese 404 y así no cambiar qué candidato de srcset gana en cada
+                 ancho de viewport. -->
+            <Image
+                src={logoAportar}
+                width={1850}
+                widths={[256, 1320, 1850]}
+                sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 800px,
+                (min-width: 820px) 750px,
+                (min-width: 660px) 600px,
+                (min-width: 500px) 400px,
                 (min-width: 320px) 300px,
                 (min-width: 280px) 250px, calc(-5320vw + 17280px)"
-
-                alt="Logo en blanco" src = "./assets/LOGOSJPANTONES-04.png">
+                quality={82}
+                alt="Logo en blanco"
+            />
             <div class="line"></div>
             <div class="aportar-texto">
                 Más que nuestra misión, nuestro estilo de vida
@@ -52,22 +67,22 @@ import Carrusel from '../components/Carrusel.astro';
         </div>
 
         <div class="valores-burbujas">
-            <div class="burbuja-container"><image class="burbuja" src="assets/iconos web-01.png" alt="icons" data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic"></image>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores1} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
                 <div class="burbuja-text-left" data-aos="fade-right">Transformación del individuo</div>
             </div>
-            <div class="burbuja-container"><image class="burbuja" src="assets/iconos web-02.png" alt="icons" data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic"></image>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores2} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
                 <div class="burbuja-text-right" data-aos="fade-left">La prevención como solución</div>
             </div>
-            <div class="burbuja-container"><image class="burbuja" src="assets/iconos web-03.png" alt="icons" data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic"></image>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores3} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
                 <div id="burb-voluntariado" class="burbuja-text-left" data-aos="fade-right" style="margin-left: 10.5rem;">Voluntariado</div>
             </div>
-            <div class="burbuja-container"><image class="burbuja" src="assets/iconos web-04.png" alt="icons" data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic"></image>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores4} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
                 <div class="burbuja-text-right" data-aos="fade-left">Compromiso</div>
             </div>
-            <div class="burbuja-container"><image class="burbuja" src="assets/iconos web-05.png" alt="icons" data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic"></image>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores5} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
                 <div id="burb-convicc" class="burbuja-text-left" data-aos="fade-right" style="margin-left: 3rem;">Convicciones profundas</div>
             </div>
-            <div class="burbuja-container"><image class="burbuja" src="assets/iconos web-06.png" alt="icons" data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic"></image>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores6} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
                 <div class="burbuja-text-right" data-aos="fade-left">Relaciones profundas</div>
             </div>
         </div>
@@ -122,54 +137,60 @@ import Carrusel from '../components/Carrusel.astro';
         <div class="historia-programas">
             <div class="brecha">
                 <div class="count-up2" data-aos="fade-up" data-aos-delay="150" data-val = '230' data-step="1"></div>
-                <!-- 256×171, 900×601, 1560×1041 -->
-                <img srcset="
-                ./assets/programa-brecha_256.png 256w,
-                ./assets/programa-brecha_900.png 1320w,
-                ./assets/programa-brecha_1560.png 1560w"
-                sizes="(min-width: 1860px) 720px, 
-                (min-width: 1300px) 500px, 
-                (min-width: 920px) 400px, 
-                (min-width: 660px) 350px, 
-                (min-width: 500px) 200px, 
+                <!-- srcset generado por astro:assets (Task 8), reemplaza las variantes
+                     manuales _256/_900/_1560 (borradas: astro:assets genera las suyas). -->
+                <Image
+                    src={programaBrecha}
+                    width={1560}
+                    widths={[256, 900, 1560]}
+                    sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 500px,
+                (min-width: 920px) 400px,
+                (min-width: 660px) 350px,
+                (min-width: 500px) 200px,
                 (min-width: 340px) 120px"
-                src = "./assets/programa-brecha.webp" alt="Programa de la Brecha" data-aos="fade-up" data-aos-delay="200" loading="lazy" >
+                    quality={82}
+                    alt="Programa de la Brecha" data-aos="fade-up" data-aos-delay="200" loading="lazy" />
                 <div class="programa-etiqueta" data-aos="fade-up" data-aos-delay="150">Programa de la Brecha</div>
             </div>
 
             <div class="conferencia">
                 <div class="count-up2" data-aos="fade-up" data-aos-delay="150" data-val = '780' data-step="3"></div>
                 <!-- <img src="./assets/programa-conferencia.webp" alt="Programa de conferencia" data-aos="fade-up" data-aos-delay="200"> -->
-                <!-- 256×171, 900×600, 1560×1040 -->
-                <img srcset="
-                ./assets/programa-conferencia_256.png 256w,
-                ./assets/programa-conferencia_900.png 1320w,
-                ./assets/programa-conferencia_1560.png 1560w"
-                sizes="(min-width: 1860px) 720px, 
-                (min-width: 1300px) 500px, 
-                (min-width: 920px) 400px, 
-                (min-width: 660px) 350px, 
-                (min-width: 500px) 200px, 
+                <!-- srcset generado por astro:assets (Task 8), reemplaza las variantes
+                     manuales _256/_900/_1560 (borradas: astro:assets genera las suyas). -->
+                <Image
+                    src={programaConferencia}
+                    width={1560}
+                    widths={[256, 900, 1560]}
+                    sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 500px,
+                (min-width: 920px) 400px,
+                (min-width: 660px) 350px,
+                (min-width: 500px) 200px,
                 (min-width: 340px) 120px"
-                src = "./assets/programa-conferencia.webp" alt="Programa de conferencia" data-aos="fade-up" data-aos-delay="200" loading="lazy" >
+                    quality={82}
+                    alt="Programa de conferencia" data-aos="fade-up" data-aos-delay="200" loading="lazy" />
                 <div class="programa-etiqueta" data-aos="fade-up" data-aos-delay="150">Participantes de conferencias</div>
             </div>
 
             <div class="verano">
                 <div class="count-up2" data-aos="fade-up" data-aos-delay="150" data-val= '2230' data-step="4"></div>
                 <!-- <img src="./assets/programa-verano.webp" alt="Programa de verano" data-aos="fade-up" data-aos-delay="200"> -->
-                <!-- 256×171, 900×600, 1560×1040 -->
-                <img srcset="
-                ./assets/programa-verano_256.png 256w,
-                ./assets/programa-verano_900.png 1320w,
-                ./assets/programa-verano_1560.png 1560w"
-                sizes="(min-width: 1860px) 720px, 
-                (min-width: 1300px) 500px, 
-                (min-width: 920px) 400px, 
-                (min-width: 660px) 350px, 
-                (min-width: 500px) 200px, 
+                <!-- srcset generado por astro:assets (Task 8), reemplaza las variantes
+                     manuales _256/_900/_1560 (borradas: astro:assets genera las suyas). -->
+                <Image
+                    src={programaVerano}
+                    width={1560}
+                    widths={[256, 900, 1560]}
+                    sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 500px,
+                (min-width: 920px) 400px,
+                (min-width: 660px) 350px,
+                (min-width: 500px) 200px,
                 (min-width: 340px) 120px"
-                src = "./assets/programa-verano.webp" alt="Programa de verano" data-aos="fade-up" data-aos-delay="200" loading="lazy" >
+                    quality={82}
+                    alt="Programa de verano" data-aos="fade-up" data-aos-delay="200" loading="lazy" />
                 <div class="programa-etiqueta" data-aos="fade-up" data-aos-delay="150">Actividades de Verano</div>
             </div>
         </div>
@@ -197,7 +218,7 @@ import Carrusel from '../components/Carrusel.astro';
         <div class="patron-center">
             <div class="patron-text">Esta página fue actualizada gracias a nuestro donador</div>
             <div class="patron-logo">
-                <img src="./assets/logo-secretaria-igualdad-inclusion.png" alt="Patrón - Secretaría Igualdad e Inclusión" loading="lazy">
+                <Image src={logoPatron} alt="Patrón - Secretaría Igualdad e Inclusión" quality={82} loading="lazy" />
             </div>
         </div>
     </div>

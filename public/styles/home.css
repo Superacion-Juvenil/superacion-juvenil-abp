@@ -4,7 +4,7 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../assets/FC4-01.png");
+  background-image: url("../assets/FC4-01.webp");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -97,25 +97,25 @@
   }
 }
 .aportar-image1 {
-  background-image: url("../assets/FC4-01.png");
+  background-image: url("../assets/FC4-01.webp");
   background-position: center;
   transition: background-image 1ms;
 }
 
 .aportar-image2 {
-  background-image: url("../assets/FC1-01.png");
+  background-image: url("../assets/FC1-01.webp");
   background-position-y: center;
   transition: background-image 1ms;
 }
 
 .aportar-image3 {
-  background-image: url("../assets/FC2-01.png");
+  background-image: url("../assets/FC2-01.webp");
   background-position: center;
   transition: background-image 1ms;
 }
 
 .aportar-image4 {
-  background-image: url("../assets/FC3-01.png");
+  background-image: url("../assets/FC3-01.webp");
   background-position-y: center;
   transition: background-image 1ms;
 }
@@ -172,6 +172,9 @@
 }
 .valores .valores-burbujas .burbuja-container .burbuja {
   width: 75%;
+  /* height:auto explícito: ver el comentario de #header img en
+     header-fijo.css (Task 8, mismo motivo con astro:assets). */
+  height: auto;
 }
 .valores .valores-burbujas .burbuja-container .burbuja-text-left {
   width: calc(7.5rem + -moz-max-content);
@@ -286,6 +289,23 @@
 }
 .historia .historia-programas img {
   width: 100%;
+  /* height:auto explícito: ver el comentario de #header img en
+     header-fijo.css (Task 8, mismo motivo con astro:assets). */
+  height: auto;
+  /* aspect-ratio:auto (Task 8): estas tres imágenes (programa-brecha/
+     conferencia/verano) están lo bastante abajo en la página como para que
+     loading="lazy" nunca dispare su carga durante la captura del arnés (ni
+     en el original ni acá: en ninguno de los dos lados llegan a verse en
+     pantalla). El original no tenía atributos width/height en el <img>, así
+     que sin cargar la imagen la caja colapsa a 0 de alto. astro:assets sí
+     agrega esos atributos (para evitar CLS), y el navegador usa la hoja de
+     estilos de user-agent (img[width][height] { aspect-ratio: ... }) para
+     reservarle su alto ANTES de cargar — 0 en el original, ~180px acá, lo
+     que corría todo el layout de abajo. Fijar aspect-ratio:auto por encima
+     de esa regla de UA hace que la caja colapse igual que el original
+     mientras no cargó, sin afectar el alto ya cargada (ahí siempre usa el
+     tamaño real de la imagen, no el aspect-ratio declarado). */
+  aspect-ratio: auto;
   margin-top: -16%;
 }
 .historia .historia-programas .brecha {
@@ -485,6 +505,9 @@
 }
 .footer .footer-logo img {
   width: 70%;
+  /* height:auto explícito: ver el comentario de #header img en
+     header-fijo.css (Task 8, mismo motivo con astro:assets). */
+  height: auto;
 }
 .footer .footer-menu {
   width: 20%;
@@ -667,22 +690,22 @@
     width: 340px;
   }
   .aportar-image1 {
-    background-image: url("../assets/FV1-01.png");
+    background-image: url("../assets/FV1-01.webp");
     background-position: center;
     transition: background-image 1s;
   }
   .aportar-image2 {
-    background-image: url("../assets/FV3-01.png");
+    background-image: url("../assets/FV3-01.webp");
     background-position-y: 30%;
     transition: background-image 1s;
   }
   .aportar-image3 {
-    background-image: url("../assets/FV2-01.png");
+    background-image: url("../assets/FV2-01.webp");
     background-position: center;
     transition: background-image 1s;
   }
   .aportar-image4 {
-    background-image: url("../assets/FV4-01.png");
+    background-image: url("../assets/FV4-01.webp");
     background-position-y: 30%;
     transition: background-image 1s;
   }

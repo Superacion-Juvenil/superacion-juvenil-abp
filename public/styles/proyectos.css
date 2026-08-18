@@ -78,7 +78,9 @@
   height: auto;
 }
 .programa-adol-uni .programas-images .programa-img2 {
-  background-image: url("../assets/fondo-universitarios.jpg");
+  /* fondo-universitarios.jpg era byte a byte idéntico a fondo-adolescentes.jpg
+     (Task 8): se dedupeó, quedó solo este último. */
+  background-image: url("../assets/fondo-adolescentes.jpg");
   width: 100%;
   height: 50%;
   background-size: cover;
@@ -299,62 +301,62 @@
   background-position-x: -150px;
 }
 .slider-proyectos .proyectos-imgs .tar1 {
-  background-image: url("../assets/slider-proyectos1.jpg");
+  background-image: url("../assets/slider-proyectos1.webp");
 }
 .slider-proyectos .proyectos-imgs .tar2 {
-  background-image: url("../assets/slider-proyectos2.jpg");
+  background-image: url("../assets/slider-proyectos2.webp");
 }
 .slider-proyectos .proyectos-imgs .tar3 {
-  background-image: url("../assets/slider-proyectos3.jpg");
+  background-image: url("../assets/slider-proyectos3.webp");
 }
 .slider-proyectos .proyectos-imgs .tar4 {
-  background-image: url("../assets/slider-proyectos4.jpg");
+  background-image: url("../assets/slider-proyectos4.webp");
 }
 .slider-proyectos .proyectos-imgs .tar5 {
-  background-image: url("../assets/slider-proyectos5.jpg");
+  background-image: url("../assets/slider-proyectos5.webp");
   background-position-y: 0px;
 }
 .slider-proyectos .proyectos-imgs .tar6 {
-  background-image: url("../assets/slider-proyectos6.jpg");
+  background-image: url("../assets/slider-proyectos6.webp");
 }
 .slider-proyectos .proyectos-imgs .tar7 {
-  background-image: url("../assets/slider-proyectos7.jpg");
+  background-image: url("../assets/slider-proyectos7.webp");
   background-position-y: 0px;
   background-position-x: -150px;
 }
 .slider-proyectos .proyectos-imgs .tar8 {
-  background-image: url("../assets/slider-proyectos8.jpg");
+  background-image: url("../assets/slider-proyectos8.webp");
 }
 .slider-proyectos .proyectos-imgs .tar10 {
-  background-image: url("../assets/slider-proyectos10.jpg");
+  background-image: url("../assets/slider-proyectos10.webp");
 }
 .slider-proyectos .proyectos-imgs .tar11 {
-  background-image: url("../assets/slider-proyectos11.jpg");
+  background-image: url("../assets/slider-proyectos11.webp");
 }
 .slider-proyectos .proyectos-imgs .tar12 {
-  background-image: url("../assets/slider-proyectos12.jpg");
+  background-image: url("../assets/slider-proyectos12.webp");
 }
 .slider-proyectos .proyectos-imgs .tar13 {
-  background-image: url("../assets/slider-proyectos13.jpg");
+  background-image: url("../assets/slider-proyectos13.webp");
 }
 .slider-proyectos .proyectos-imgs .tar14 {
-  background-image: url("../assets/slider-proyectos14.jpg");
+  background-image: url("../assets/slider-proyectos14.webp");
   background-position-x: -80px;
 }
 .slider-proyectos .proyectos-imgs .tar15 {
-  background-image: url("../assets/slider-proyectos15.jpg");
+  background-image: url("../assets/slider-proyectos15.webp");
 }
 .slider-proyectos .proyectos-imgs .tar16 {
-  background-image: url("../assets/slider-proyectos16.jpg");
+  background-image: url("../assets/slider-proyectos16.webp");
 }
 .slider-proyectos .proyectos-imgs .tar17 {
-  background-image: url("../assets/slider-proyectos17.jpeg");
+  background-image: url("../assets/slider-proyectos17.webp");
 }
 .slider-proyectos .proyectos-imgs .tar18 {
-  background-image: url("../assets/slider-proyectos18.jpg");
+  background-image: url("../assets/slider-proyectos18.webp");
 }
 .slider-proyectos .proyectos-imgs .tar19 {
-  background-image: url("../assets/slider-proyectos19.jpg");
+  background-image: url("../assets/slider-proyectos19.webp");
 }
 
 .eventos-alto {

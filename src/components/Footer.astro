@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoFooter from '../assets/LOGOSJPANTONES-04.png';
+
 // nosotros.html y aviso.html son las únicas páginas del original que traen este
 // link en el footer (verificado archivo por archivo en .baseline/*.html);
 // index, proyectos y unete no lo tienen. Se replica con esta prop, en vez de
@@ -10,7 +13,7 @@ const { mostrarAviso = false } = Astro.props;
 ---
     <div class="footer">
         <div class="footer-logo">
-            <img class="header-img" src="assets/LOGOSJPANTONES-04.png" alt="ABP_LOGO">
+            <Image class="header-img" src={logoFooter} alt="ABP_LOGO" quality={82} />
         </div>
 
         <!-- <div class="footer-menu">
