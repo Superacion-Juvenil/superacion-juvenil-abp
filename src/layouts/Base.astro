@@ -7,9 +7,12 @@ interface Props {
   descripcion: string;
   canonica: string;
   headerFijo?: boolean;
+  // Solo nosotros.html y aviso.html traen el link "Aviso de Privacidad." en el
+  // footer del original. Ver el mismo comentario en Footer.astro.
+  mostrarAviso?: boolean;
 }
 
-const { titulo, descripcion, canonica, headerFijo = false } = Astro.props;
+const { titulo, descripcion, canonica, headerFijo = false, mostrarAviso = false } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -59,10 +62,12 @@ const { titulo, descripcion, canonica, headerFijo = false } = Astro.props;
 <body>
     <input type="checkbox" id="menu-chk" style="display: none;">
     <label id="dim-menu-close" for="menu-chk" onclick="overFlowV()"></label>
+    <slot name="pre-header" />
 
+    {headerFijo && <div class="space" style="width: 100%; height: 120px;"></div>}
     <Header fijo={headerFijo} />
     <slot />
-    <Footer />
+    <Footer mostrarAviso={mostrarAviso} />
     <slot name="scripts" />
 </body>
 </html>

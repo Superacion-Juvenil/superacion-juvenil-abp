@@ -1,3 +1,13 @@
+---
+// nosotros.html y aviso.html son las únicas páginas del original que traen este
+// link en el footer (verificado archivo por archivo en .baseline/*.html);
+// index, proyectos y unete no lo tienen. Se replica con esta prop, en vez de
+// mostrarlo siempre.
+interface Props {
+  mostrarAviso?: boolean;
+}
+const { mostrarAviso = false } = Astro.props;
+---
     <div class="footer">
         <div class="footer-logo">
             <img class="header-img" src="assets/LOGOSJPANTONES-04.png" alt="ABP_LOGO">
@@ -15,6 +25,7 @@
             <div class="contacto-title">Contacto</div>
             <div class="contacto-tel">Tel: (81)1352 5333 ext. 106 y 108</div>
             <div class="contacto-correo">desarrollo@superacionjuvenil.org</div>
+            {mostrarAviso && <a href="./aviso.html" style="padding-top: 15px">Aviso de Privacidad.</a>}
             <div class="contacto-redes">
                 <a href="https://www.facebook.com/superacionjuvenilabp/" target="_blank" style="padding-top:43px"><img src="./assets/facebook.svg" alt="Facebook logo" style="width: 54px; padding-bottom: 2px;" loading="lazy"></a>
                 <a href="https://www.instagram.com/superacionjuvenil/" target="_blank" style="padding-top:43px"><img src="./assets/instagram.svg" alt="Instagram logo" loading="lazy"></a>
