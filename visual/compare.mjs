@@ -51,9 +51,14 @@ async function capturar(page, url, ancho, urlsRotas) {
   await page.setViewportSize({ width: ancho, height: 900 });
 
   // Junta las URLs de subrecursos (imágenes, CSS, JS — cualquier cosa que el
-  // documento pida) que respondan >=400. Se registra ANTES del goto y se
-  // saca después de la captura para no arrastrar respuestas de otras
-  // páginas. Se acumula en un Set por (página, lado) que pasa el caller,
+  // documento pida) que respondan >=400. Se registra ANTES del goto y se saca
+  // recién después de forzar la carga de las <img loading="lazy"> más abajo
+  // (no justo después del goto): esas imágenes lazy todavía no dispararon su
+  // request en ese punto, así que sacar el listener ahí las deja afuera —
+  // se midieron entre 4 y 7 requests de imagen por carga que quedaban sin
+  // registrar, y los dos 404 de imagen Critical que esta guarda existe para
+  // atrapar (Task 8: .tarj8 y los thumbnails de .historia) eran justamente
+  // de ese tipo. Se acumula en un Set por (página, lado) que pasa el caller,
   // así una misma URL rota vista en varios anchos (p. ej. una entrada de
   // srcset) cuenta una sola vez.
   const alRecibirRespuesta = (respuesta) => {
@@ -62,7 +67,6 @@ async function capturar(page, url, ancho, urlsRotas) {
   page.on('response', alRecibirRespuesta);
 
   const respuesta = await page.goto(url, { waitUntil: 'networkidle' });
-  page.off('response', alRecibirRespuesta);
 
   // page.goto no lanza ante un 4xx/5xx (solo ante errores de red), así que hay que
   // revisar el status a mano. Si no, una página rota que responde igual en ambos
@@ -70,6 +74,10 @@ async function capturar(page, url, ancho, urlsRotas) {
   // note que en realidad no se está comparando el sitio real.
   const status = respuesta ? respuesta.status() : 0;
   if (status < 200 || status >= 300) {
+    // Se saca el listener también en este camino de salida temprana: si no,
+    // queda pegado a `page` (se reusa entre llamadas) y las respuestas de la
+    // próxima navegación se cuentan para esta página en vez de la suya.
+    page.off('response', alRecibirRespuesta);
     return { error: `${url} respondió con status ${status} (se esperaba 2xx)` };
   }
   await page.addStyleTag({ content: CSS_CONGELAR });
@@ -133,6 +141,10 @@ async function capturar(page, url, ancho, urlsRotas) {
       })
     );
   });
+  // Recién acá se saca el listener: las imágenes lazy ya dispararon su
+  // request (forzadas arriba) y ya decodificaron, así que sus respuestas
+  // >=400 (si las hay) ya quedaron registradas en urlsRotas.
+  page.off('response', alRecibirRespuesta);
   const mascaras = await page.locator(SELECTOR_CARRUSELES).locator('xpath=..').all();
   const buffer = await page.screenshot({ fullPage: true, animations: 'disabled', mask: mascaras });
   return { buffer };
@@ -180,16 +192,18 @@ const avisos = [];
 let comparadas = 0;
 
 // Un Set de URLs rotas (status >=400) por página y por lado, acumulado a
-// través de todos los anchos probados. Al final se compara el tamaño de cada
-// par: si CAND tiene más recursos rotos que BASE en una página, es una
-// regresión real (imagen movida/renombrada sin actualizar todas sus
-// referencias, script pidiendo una ruta vieja, etc.) y el arnés falla, aunque
-// el diff de píxeles no la vea (p. ej. un background-image que quedó vacío
-// puede no mover ni un píxel del layout). Se compara CAND contra BASE, no
-// contra cero: el sitio original tiene su propio 404 conocido y legítimo
-// (LOGOSJPANTONES-04_2263.png, referenciado en un srcset manual que nunca
-// se generó), así que exigir cero recursos rotos en absoluto haría fallar el
-// arnés contra el propio original.
+// través de todos los anchos probados. Al final se compara CAND contra BASE
+// como conjuntos (no por cantidad — ver más abajo): si CAND tiene URLs rotas
+// que BASE no tenía, es una regresión real (imagen movida/renombrada sin
+// actualizar todas sus referencias, script pidiendo una ruta vieja, etc.) y
+// el arnés falla, aunque el diff de píxeles no la vea (p. ej. un
+// background-image que quedó vacío puede no mover ni un píxel del layout).
+// Se compara CAND contra BASE, no contra cero, para que el arnés falle solo
+// ante recursos rotos que introdujo la migración: BASE se navega en la misma
+// corrida que CAND, así que cualquier ruido ajeno al candidato (un recurso
+// externo caído en ese momento, una condición de carrera puntual del propio
+// entorno de prueba) queda absorbido para los dos lados por igual, en vez de
+// hacer fallar el arnés por algo que no tiene que ver con la migración.
 const urlsRotasPorPagina = new Map(PAGINAS.map((p) => [p, { base: new Set(), cand: new Set() }]));
 
 for (const pagina of PAGINAS) {
@@ -232,11 +246,16 @@ for (const pagina of PAGINAS) {
 }
 
 for (const [pagina, { base, cand }] of urlsRotasPorPagina) {
-  if (cand.size > base.size) {
-    const nuevas = [...cand].filter((u) => !base.has(u));
+  // Comparación por conjunto, no por tamaño: si BASE y CAND tienen la misma
+  // cantidad de recursos rotos pero son URLs distintas, igual es una
+  // regresión (CAND rompió una URL que BASE no tenía, aunque también haya
+  // arreglado otra que BASE sí tenía) — comparar solo `cand.size > base.size`
+  // no lo detecta.
+  const nuevas = [...cand].filter((u) => !base.has(u));
+  if (nuevas.length > 0) {
     fallas.push(
-      `${pagina}: CAND tiene ${cand.size} recursos con status >=400 (BASE tiene ${base.size}) — ` +
-      `nuevos: ${nuevas.join(', ')}`
+      `${pagina}: CAND tiene ${nuevas.length} recurso(s) con status >=400 que BASE no tenía — ` +
+      `${nuevas.join(', ')}`
     );
   }
 }
