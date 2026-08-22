@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import logoHeader from '../assets/LOGO SJ PANTONES-03.png';
+
+interface Props { fijo?: boolean }
+const { fijo = false } = Astro.props;
+---
+<header id="header" class="nav-up" style={fijo ? 'position: fixed' : undefined}>
+    <label class="menu-icon" for="menu-chk">
+        <div class="bar-menu-icon"></div>
+        <div class="bar-menu-icon"></div>
+        <div class="bar-menu-icon"></div>
+    </label>
+
+    <a home-link="true" id="img-hover" href="/index.html">
+        <Image class="header-img" src={logoHeader} alt="ABP_LOGO" quality={82} loading="eager" />
+    </a>
+    <nav>
+        <div class="header-option"><a href="index.html">Inicio</a></div>
+        <div class="header-option"><a href="nosotros.html">Nosotros</a></div>
+        <div class="header-option"><a href="proyectos.html">Proyectos</a></div>
+        <div class="header-aportar"><a href="unete.html">Aportar a la causa</a></div>
+    </nav>
+
+    <div class="nav-desk">
+        <div class="header-option-desk"><a href="index.html">Inicio</a></div>
+        <div class="header-option-desk"><a href="nosotros.html">Nosotros</a></div>
+        <div class="header-option-desk"><a href="proyectos.html">Proyectos</a></div>
+        <div class="header-aportar-desk"><a href="unete.html">Aportar a la causa</a></div>
+    </div>
+</header>

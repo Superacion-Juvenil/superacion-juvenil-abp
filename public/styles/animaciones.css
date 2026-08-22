@@ -1,0 +1,75 @@
+/* Reemplazo de AOS (ver src/scripts/animaciones.js para el observer).
+   Estado inicial en [data-aos="..."] y final en [data-aos].aos-animate,
+   replicando los valores de aos@next (duración 400ms, curva "ease"):
+   transformaciones y opacidades sacadas de https://unpkg.com/aos@next/dist/aos.css,
+   offset (120px) y delay (data-aos-delay) los aplica el observer en JS. */
+
+[data-aos] {
+    pointer-events: none;
+    transition-property: opacity, transform;
+    transition-duration: 400ms;
+    transition-timing-function: ease;
+}
+
+[data-aos].aos-animate {
+    pointer-events: auto;
+}
+
+/* Familia fade-*: opacity 0 -> 1, con un desplazamiento inicial según la
+   dirección. fade-in (sin dirección) solo cambia opacity, igual que en AOS. */
+[data-aos^="fade"] {
+    opacity: 0;
+}
+
+[data-aos^="fade"].aos-animate {
+    opacity: 1;
+    transform: none;
+}
+
+[data-aos="fade-up"] { transform: translate3d(0, 100px, 0); }
+[data-aos="fade-down"] { transform: translate3d(0, -100px, 0); }
+[data-aos="fade-right"] { transform: translate3d(-100px, 0, 0); }
+[data-aos="fade-left"] { transform: translate3d(100px, 0, 0); }
+
+/* aos.css trae una regla GENÉRICA de prefijo, [data-aos^="zoom"], que no
+   filtra por nombre reconocido — aplica a cualquier data-aos que empiece con
+   "zoom", incluidos zoom-up y zoom-down (que no son animaciones válidas de
+   AOS y no tienen su propia regla de transform). Por eso esos dos SÍ animan
+   en el sitio original (los carruseles de "colaboradores" en index y de
+   imágenes en proyectos): heredan este fade genérico, aunque no tengan
+   movimiento direccional propio. Buscar "[data-aos=zoom-up]" en aos.css no
+   encuentra nada — hay que buscar el prefijo para verlo. Confirmado en vivo
+   contra .baseline/index.html y .baseline/proyectos.html: ambos elementos
+   pasan de opacity:0 a opacity:1 con .aos-animate al entrar en viewport.
+   zoom-in-down, en cambio, SÍ es un nombre válido y tiene su propia regla de
+   transform (ver abajo), que se agrega encima de este fade genérico. */
+[data-aos^="zoom"] {
+    opacity: 0;
+}
+
+[data-aos^="zoom"].aos-animate {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+}
+
+[data-aos="zoom-in-down"] {
+    transform: translate3d(0, -100px, 0) scale(0.6);
+}
+
+/* flip-left: solo rota, sin cambiar opacity (igual que en AOS). */
+[data-aos="flip-left"] {
+    transition-property: transform;
+    backface-visibility: hidden;
+    transform: perspective(2500px) rotateY(-100deg);
+}
+
+[data-aos="flip-left"].aos-animate {
+    transform: perspective(2500px) rotateY(0);
+}
+
+/* Los 6 elementos flip-left del markup traen data-aos-easing="ease-out-cubic":
+   AOS lo traduce a este cubic-bezier (verificado en aos.css). */
+[data-aos="flip-left"][data-aos-easing="ease-out-cubic"] {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+

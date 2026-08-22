@@ -116,9 +116,9 @@ jQuery no lo usa solo Owl Carousel: también `aportar-images.js`, `header-scroll
 - **Carruseles** → un componente con CSS scroll-snap más ~40 líneas de JS que replican lo
   que hace Owl hoy: autoplay cada 4s, loop infinito, pausa al pasar el mouse, y 4/3/4/5
   ítems por breakpoint en el carrusel de logos, 1/2/3 en el de proyectos.
-- **AOS** → IntersectionObserver más transiciones CSS. 53 elementos, 6 animaciones reales
-  en uso: `fade-up` (19), `fade-right` (14), `fade-left` (7), `flip-left` (6),
-  `fade-down` (3), `fade-in` (1).
+- **AOS** → IntersectionObserver más transiciones CSS. 53 elementos: `fade-up` (19),
+  `fade-right` (14), `fade-left` (7), `flip-left` (6), `fade-down` (3), `fade-in` (1),
+  más `zoom-in-down` y los dos `zoom-up`/`zoom-down` (ver corrección abajo).
 - **Los 4 scripts propios** se reescriben en vanilla y pasan a ser módulos del componente
   que los usa, en lugar de 8 bloques `<script>` inline.
 
@@ -173,7 +173,12 @@ Tres fuentes de ruido hay que neutralizar para que la comparación signifique al
 
 1. Las 140 comparaciones de screenshots pasan el umbral de 0,5%.
 2. Las URLs siguen siendo `/nosotros.html`, no `/nosotros/`.
-3. El peso total transferido baja de ~132 MB a menos de 15 MB.
+3. El peso transferido de las páginas baja al menos un 70%.
+   (Corregido 2026-08-18: el criterio original decía "menos de 15 MB" pero
+   confundía el peso de `dist/` con el peso transferido. Los PDFs de
+   `files_download/` pesan 48 MB y solo se descargan si alguien los clickea:
+   no son peso de página. Medido con Playwright sumando bytes de red por
+   página: 68,13 MB -> 17,41 MB en total, -74%; la home 47,56 -> 4,68 MB, -90%.)
 4. Cero jQuery y cero `<script>` inline en el HTML final.
 5. El formulario envía un correo real de punta a punta.
 
@@ -186,7 +191,7 @@ sitio, no migrarlo.
 | Quirk | Efecto hoy |
 |---|---|
 | `unete.html` y `aviso.html` no cargan `menu.js` | El `onclick="overFlowH()"` del menú hamburguesa tira ReferenceError |
-| `zoom-up` y `zoom-down` no existen en AOS | Esos 2 elementos no animan |
+| ~~`zoom-up` y `zoom-down` no existen en AOS~~ | **Corregido 2026-08-18: era falso.** AOS aplica una regla de prefijo `[data-aos^="zoom"]` y agrega la clase a todo `[data-aos]` sin filtrar por nombre, así que esos 2 elementos SÍ animan. Se replica la animación. |
 | `header-scroll.js` solo se carga en `index` | El contador `.count-up2` (4 elementos) solo corre ahí |
 | El grueso de `header-scroll.js` está comentado | De ese archivo solo vive el disparador del contador |
 

@@ -1,2 +1,7 @@
 .vercel
 .env*
+.baseline
+node_modules
+dist
+visual/diffs
+.astro/

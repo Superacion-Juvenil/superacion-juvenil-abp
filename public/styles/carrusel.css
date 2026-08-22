@@ -1,0 +1,40 @@
+/* Carrusel propio con CSS scroll-snap (reemplaza a Owl Carousel, Task 5).
+   El contenedor raíz (.carrusel) siempre lleva además la clase propia de la
+   página (.colaboradores-logos en index, .proyectos-imgs en proyectos), que
+   ya define su ancho/alto/margen en home.css/proyectos.css: ese CSS no se
+   toca. Acá solo se define lo nuevo: la pista con scroll-snap y el tamaño de
+   cada item (.carrusel-item, agregado por public/js/carrusel.js alrededor de
+   cada hijo del slot), calculado con las variables --items/--margen que ese
+   mismo script actualiza por breakpoint. */
+
+.carrusel-pista {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Edge viejo */
+  /* .carrusel-pista es flex-child de .carrusel (que en proyectos hereda
+     display:flex + height:250/300px de .proyectos-imgs, ver proyectos.css).
+     Sin esto, el align-items:stretch por defecto la estira a esa altura
+     fija, y con ella también se estira .carrusel-item (su propio hijo,
+     stretch de nuevo) — entonces .tar1 { height:100% } (regla propia de
+     proyectos.css bajo cierta media query) mide 100% de esa altura fija en
+     vez de la altura natural del contenido (290px en el original, medido
+     contra .owl-item). Con background-size:cover eso reencuadra la foto.
+     align-self:flex-start saca a la pista de ese estirado: vuelve a medir
+     según su contenido, igual que el .owl-stage-outer del original.
+     Ojo: tiene que ir acá, en la pista — puesto en .carrusel-item en vez de
+     acá da height:0 (probado). */
+  align-self: flex-start;
+}
+.carrusel-pista::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.carrusel-item {
+  flex: 0 0 calc((100% - (var(--items, 1) - 1) * var(--margen, 0px)) / var(--items, 1));
+  margin-right: var(--margen, 0px);
+  overflow: hidden;
+  scroll-snap-align: start;
+}

@@ -1,0 +1,42 @@
+/* base.css — style.css original líneas 1-41: @charset y @font-face (tipografías). */
+@charset "UTF-8";
+@font-face {
+  font-family: Poppins-medium;
+  src: url("../fonts/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-MediumItalic;
+  src: url("../fonts/Poppins-MediumItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("../fonts/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url("../fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: ApexNew;
+  src: url("../fonts/ApexNew-BoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: ApexBook;
+  src: url("../fonts/apexnew-book.otf") format("opentype");
+}
+@font-face {
+  font-family: ApexLight;
+  src: url("../fonts/apexnew-light.otf") format("opentype");
+}
+@font-face {
+  font-family: ApexMedium;
+  src: url("../fonts/apexnew-medium.otf") format("opentype");
+}
+@font-face {
+  font-family: ApexThin;
+  src: url("../fonts/apexnew-thinitalic.otf") format("opentype");
+}
+@font-face {
+  font-family: ApexUltra;
+  src: url("../fonts/apexnew-ultraitalic.otf") format("opentype");
+}
