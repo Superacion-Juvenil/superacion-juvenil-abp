@@ -190,7 +190,6 @@ sitio, no migrarlo.
 
 | Quirk | Efecto hoy |
 |---|---|
-| `nosotros.html` no carga ningún script | Sus 16 elementos con `data-aos` nunca animan |
 | `unete.html` y `aviso.html` no cargan `menu.js` | El `onclick="overFlowH()"` del menú hamburguesa tira ReferenceError |
 | ~~`zoom-up` y `zoom-down` no existen en AOS~~ | **Corregido 2026-08-18: era falso.** AOS aplica una regla de prefijo `[data-aos^="zoom"]` y agrega la clase a todo `[data-aos]` sin filtrar por nombre, así que esos 2 elementos SÍ animan. Se replica la animación. |
 | `header-scroll.js` solo se carga en `index` | El contador `.count-up2` (4 elementos) solo corre ahí |
@@ -198,6 +197,13 @@ sitio, no migrarlo.
 
 Cada quirk queda documentado en el código con un comentario que explica que es
 intencional, para que nadie lo "arregle" sin querer en el futuro.
+
+**No es un quirk:** en el clon del 14/08 `nosotros.html` había quedado sin ningún `<script>`,
+y como `aos.css` aplica `opacity: 0` a todo `[data-aos^="fade"]` hasta que el JS agrega
+`.aos-animate`, sus 16 bloques de contenido no se veían. Era una corrupción del archivo
+—guardado desde el DOM del navegador, con `<p>`/`<br>` inyectados—, no un comportamiento
+del sitio. Se restauró desde el snapshot del 07/03/2026 y la página vuelve a cargar
+`aos.js`, `AOS.init()` y `menu.js` como el resto.
 
 Si en algún momento se quieren corregir, es una decisión aparte y posterior a la
 migración, con su propia validación visual.

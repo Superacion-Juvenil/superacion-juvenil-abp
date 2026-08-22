@@ -25,8 +25,13 @@ anchos contra el sitio original (140 comparaciones). No corre solo con
 
 ```bash
 # Baseline inmutable: worktree separado (ignorado por git) con el commit
-# del clon exacto del sitio previo a la migración.
-git worktree add .baseline 15bff6bf
+# del clon exacto del sitio previo a la migración. Es 8bf78e9 (no el 15bff6bf
+# original) porque ese commit trae nosotros.html restaurado sin la corrupción
+# del navegador (PR #1): el clon congelado en 15bff6bf tenía ese archivo
+# guardado desde el DOM, sin sus <script>, lo que dejaba sus 16 bloques con
+# data-aos en opacity:0 — comparar contra eso mediría fidelidad a una página
+# rota, no al sitio original.
+git worktree add .baseline 8bf78e9
 
 npx playwright install chromium   # una sola vez
 

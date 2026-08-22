@@ -1,6 +1,4 @@
 ---
-// NO agregar scripts acá. El sitio original no carga ninguno en esta página, así que
-// sus atributos data-aos no animan. Es intencional: replica el comportamiento actual.
 import Base from '../layouts/Base.astro';
 ---
 <Base
@@ -10,20 +8,16 @@ import Base from '../layouts/Base.astro';
   headerFijo={true}
   mostrarAviso={true}
   verEstilo="3.5"
+  animacionesCss={true}
 >
-  <!-- .baseline/nosotros.html quedó guardado con el <body> reserializado por un
-       navegador (atributos spellcheck/style espurios, comentarios envueltos en <p>),
-       a diferencia de las demás páginas. Ese <p><label ...></label><br></p> agrega un
-       <br> real en el flujo normal, antes del header fijo, que suma ~18px de alto
-       visible. Se replica acá (en vez de en Base.astro, que es compartido) para que
-       nosotros.html siga midiendo la misma altura que el original en el arnés visual. -->
-  <br slot="pre-header" />
   <!-- Contenido extraído con: sed -n '83,261p' .baseline/nosotros.html -->
   <!-- (83..282 menos el footer, que ya se renderiza vía <Footer mostrarAviso={true} /> en Base.astro) -->
 
     <div class="informe-anual">
-      <h1 data-aos="fade-right" data-aos-delay="150">Informe anual 2024</h1>
-      <a href="./files_download/Informe Anual SJ 2025.pdf" target="_blank">Ver PDF</a>
+      <h1 data-aos="fade-right" data-aos-delay="150">Informe anual 2025</h1>
+      <a href="./files_download/Informe Anual SJ 2025.pdf" target="_blank"
+        >Ver PDF</a
+      >
     </div>
     <div class="somos">
       <div class="somos-title">
@@ -145,10 +139,10 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
       </div>
-      <div class="modelo-image"><br></div>
+      <div class="modelo-image"></div>
     </div>
     <div class="objetivo">
-      <div class="obj-general-circle"><br></div>
+      <div class="obj-general-circle"></div>
       <div class="obj-general">
         <div class="obj-r1" data-aos="fade-down" data-aos-delay="250">
           <h1>Objetivo General</h1>
@@ -180,24 +174,50 @@ import Base from '../layouts/Base.astro';
     </div>
     <div class="informes">
       <div class="informe-actual" data-aos="fade-right" data-aos-delay="150">
-        <h1>Informe anual 2024</h1>
-        <a href="./files_download/Informe Anual SJ 2024.pdf" target="_blank">Ver PDF</a>
+        <h1>Informe anual 2025</h1>
+        <a href="./files_download/Informe Anual SJ 2025.pdf" target="_blank"
+          >Ver PDF</a
+        >
       </div>
       <div class="informes-pasados" data-aos="fade-right" data-aos-delay="150">
         <ul>
           <li>
-            <a href="./files_download/Informe Anual SJ 2023.pdf" target="_blank">Informe anual 2023</a>
+            <a href="./files_download/Informe Anual SJ 2024.pdf" target="_blank"
+              >Informe anual 2024</a
+            >
           </li>
           <li>
-            <a href="./files_download/Informe Anual SJ 2022.pdf" target="_blank">Informe anual 2022</a>
+            <a href="./files_download/Informe Anual SJ 2023.pdf" target="_blank"
+              >Informe anual 2023</a
+            >
           </li>
           <li>
-            <a href="./files_download/Informe Anual SJ 2021.pdf" target="_blank">Informe anual 2021</a>
+            <a href="./files_download/Informe Anual SJ 2022.pdf" target="_blank"
+              >Informe anual 2022</a
+            >
           </li>
           <li>
-            <a href="./files_download/Informe Anual SJ 2020.pdf" target="_blank">Informe anual 2020</a>
+            <a href="./files_download/Informe Anual SJ 2021.pdf" target="_blank"
+              >Informe anual 2021</a
+            >
+          </li>
+          <li>
+            <a href="./files_download/Informe Anual SJ 2020.pdf" target="_blank"
+              >Informe anual 2020</a
+            >
           </li>
         </ul>
       </div>
     </div>
+
+  <Fragment slot="scripts">
+        <script>
+            import { iniciarAnimaciones } from '../scripts/animaciones.js';
+            iniciarAnimaciones();
+        </script>
+        <script>
+            import { iniciarMenu } from '../scripts/menu.js';
+            iniciarMenu();
+        </script>
+  </Fragment>
 </Base>

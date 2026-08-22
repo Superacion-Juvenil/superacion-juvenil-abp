@@ -27,12 +27,11 @@ interface Props {
   // Solo index.html y proyectos.html traen carrusel (antes owl, ahora el
   // componente propio de Task 5); nosotros/unete/aviso no cargan su CSS.
   carruselCss?: boolean;
-  // index/proyectos/unete/aviso son las 4 páginas que cargaban AOS (ver Task 6).
-  // nosotros.astro no pasa esta prop a propósito: no carga el script de
-  // animaciones (src/scripts/animaciones.js) y por eso sus data-aos no
-  // animan hoy — si acá se cargara igual el CSS, sus 16 elementos quedarían
-  // en opacity:0 para siempre (el CSS los arranca ocultos y solo el
-  // observer de animaciones.js los revela).
+  // Las 5 páginas cargan AOS en el original (ver Task 6) y por lo tanto pasan
+  // esta prop. nosotros.html se había restaurado en el clon congelado sin sus
+  // <script>, dejando sus 16 data-aos en opacity:0 para siempre (el CSS los
+  // arranca ocultos y solo el observer de animaciones.js los revela); eso fue
+  // un defecto del clon, no del sitio original, y ya se corrigió (ver PR #1).
   animacionesCss?: boolean;
 }
 
