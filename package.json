@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
     "visual": "node visual/compare.mjs",
     "verificar-fixes": "node scripts/verificar-fixes.mjs"
   },

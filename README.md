@@ -11,11 +11,11 @@ npm install
 npm run dev      # dev server de Astro
 npm run build    # genera dist/client (HTML estático, /pagina.html — no /pagina/)
                  # y dist/server (función serverless de /api/contacto, Task 9)
-npm run preview  # sirve dist/ localmente — SOLO estático. Desde Task 9 el
-                 # adapter de Vercel no soporta `astro preview` en modo
-                 # servidor (no expone entrypoint de preview): para probar
-                 # /api/contacto local usá `npm run dev` o `npx vercel dev`.
 ```
+
+**Para probar localmente:**
+- `/api/contacto`: necesita servidor. Usá `npm run dev` (Astro) o `npx vercel dev` (Vercel).
+- El comando `astro preview` no funciona (adapter de Vercel no lo soporta en modo servidor).
 
 ## Verificación visual
 
