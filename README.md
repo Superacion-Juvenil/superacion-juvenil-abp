@@ -59,3 +59,7 @@ hace fallar el arnés (exit 1) y bloquea el merge. Un aviso es ruido menor
 - `npm run verificar-fixes`: chequeo rápido y puntual (no las 140
   comparaciones) de tres fixes de Task 8. Necesita `.baseline` en `:4001` y
   `dist/client` en `:4002`, igual que el arnés.
+- `npm run verificar-animaciones`: compara el estado final de cada
+  `[data-aos]` (animado o no) entre original y candidato scrolleando de
+  verdad, sin la guarda de opacidad congelada del arnés — la única forma de
+  detectar una divergencia en `src/scripts/animaciones.js`. Mismos puertos.

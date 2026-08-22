@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "visual": "node visual/compare.mjs",
-    "verificar-fixes": "node scripts/verificar-fixes.mjs"
+    "verificar-fixes": "node scripts/verificar-fixes.mjs",
+    "verificar-animaciones": "node scripts/verificar-animaciones.mjs"
   },
   "repository": {
     "type": "git",
