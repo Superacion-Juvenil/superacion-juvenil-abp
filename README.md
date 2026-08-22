@@ -9,8 +9,12 @@ cambiar el diseño. 5 páginas: `index`, `nosotros`, `proyectos`, `unete`, `avis
 ```bash
 npm install
 npm run dev      # dev server de Astro
-npm run build    # genera dist/ (HTML estático, /pagina.html — no /pagina/)
-npm run preview  # sirve dist/ localmente
+npm run build    # genera dist/client (HTML estático, /pagina.html — no /pagina/)
+                 # y dist/server (función serverless de /api/contacto, Task 9)
+npm run preview  # sirve dist/ localmente — SOLO estático. Desde Task 9 el
+                 # adapter de Vercel no soporta `astro preview` en modo
+                 # servidor (no expone entrypoint de preview): para probar
+                 # /api/contacto local usá `npm run dev` o `npx vercel dev`.
 ```
 
 ## Verificación visual
@@ -28,10 +32,15 @@ npx playwright install chromium   # una sola vez
 
 npm run build
 node visual/servidores.mjs .baseline 4001 &
-node visual/servidores.mjs dist 4002 &
+node visual/servidores.mjs dist/client 4002 &
 npm run visual
 kill %1 %2   # al terminar
 ```
+
+Nota (desde Task 9): con la función de `/api/contacto`, `astro build` ya no
+genera `dist/` como carpeta plana — separa `dist/client` (los 5 `.html` +
+assets estáticos, lo único que el arnés compara) de `dist/server` (el código
+de la función). Por eso el candidato se sirve desde `dist/client`, no `dist`.
 
 Salida esperada: `comparadas: 140/140`, `fallas: 0`.
 
@@ -44,4 +53,4 @@ hace fallar el arnés (exit 1) y bloquea el merge. Un aviso es ruido menor
 
 - `npm run verificar-fixes`: chequeo rápido y puntual (no las 140
   comparaciones) de tres fixes de Task 8. Necesita `.baseline` en `:4001` y
-  `dist` en `:4002`, igual que el arnés.
+  `dist/client` en `:4002`, igual que el arnés.

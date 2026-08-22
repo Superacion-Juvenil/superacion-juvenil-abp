@@ -57,11 +57,17 @@ import Base from '../layouts/Base.astro';
     <div class="contacto" data-aos="fade-right" data-aos-delay="150">
         <div class="formulario">
             <h1>Información de contacto</h1>
-            <!-- <form action="./mail/message.php" method="post"> -->
-            <form action="./mail/message.php" method="post">
+            <form action="/api/contacto" method="post">
                 <input type="text" placeholder="Email" name="correo">
                 <input type="text" placeholder="Nombre" name="nombre">
                 <textarea placeholder="Mensaje" name="mensaje"></textarea>
+                <!-- Honeypot anti-spam: campo señuelo que un humano nunca ve ni
+                     llena (oculto por CSS, no type="hidden", que los bots
+                     detectan). Si viene lleno en el POST, api/contacto.ts
+                     responde como si el envío hubiera salido bien pero no manda
+                     nada. position:absolute lo saca del flujo: no ocupa espacio
+                     ni corre el resto del formulario (ver arnés visual). -->
+                <input type="text" name="sitio" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; opacity:0;">
                 <button class="mail-button" type="submit">Contáctanos ></button>
                 <!-- Tal vez poner un mensaje como "te contactaremos pronto" -->
             </form>

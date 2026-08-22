@@ -7,7 +7,7 @@
 // ya lo tiene): esto es más rápido para reverificar estos tres puntos
 // puntuales sin correr las 140 comparaciones completas.
 //
-// Uso: con BASE (.baseline) sirviendo en :4001 y CAND (dist) en :4002,
+// Uso: con BASE (.baseline) sirviendo en :4001 y CAND (dist/client) en :4002,
 //   node scripts/verificar-fixes.mjs
 import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
