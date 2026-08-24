@@ -15,7 +15,10 @@
 - **Umbral de fidelidad:** una comparación falla si difiere más del **0,5%** de los pixeles.
 - **Breakpoints obligatorios** (los 28 del CSS): 320, 360, 375, 400, 420, 430, 480, 481, 500, 600, 657, 700, 767, 800, 820, 840, 850, 900, 912, 913, 950, 1000, 1024, 1200, 1280, 1290, 1455, 1590.
 - **Páginas:** `index.html`, `nosotros.html`, `proyectos.html`, `unete.html`, `aviso.html`.
-- **Quirks que se preservan** (ver spec): `unete` y `aviso` no cargan `menu.js`; `zoom-up`/`zoom-down` no animan; el contador `.count-up2` solo corre en `index`.
+- **Quirks que se preservan** (ver spec): `unete` y `aviso` no cargan `menu.js`; el contador `.count-up2` solo corre en `index`.
+- **Dos supuestos quirks resultaron falsos y NO se replican:**
+  - `zoom-up`/`zoom-down` SÍ animan en el original (AOS aplica una regla de prefijo `[data-aos^="zoom"]` que no filtra por nombre). Corregido 2026-08-18.
+  - `nosotros` sin scripts **no era un quirk sino un archivo corrupto**: el clon se guardó desde el DOM del navegador y perdió sus `<script>`, y como `aos.css` deja todo `[data-aos^="fade"]` en `opacity: 0` hasta que el JS agrega `.aos-animate`, sus 16 bloques de contenido quedaban invisibles. Restaurado desde el snapshot del 07/03/2026 (PR #1).
 - **Cada quirk replicado lleva un comentario en el código** explicando que es intencional.
 - **Ningún paso toca el DNS de `superacionjuvenil.org`.** Eso es una decisión posterior y explícita del dueño.
 - **Idioma:** el código y los comentarios se escriben en español, como el resto del repo.

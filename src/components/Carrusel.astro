@@ -1,0 +1,35 @@
+---
+// Reemplazo casero de Owl Carousel (Task 5). Renderiza un contenedor con
+// scroll-snap; el autoplay, el loop y la pausa al pasar el mouse los agrega
+// public/js/carrusel.js en tiempo de ejecución, envolviendo cada hijo del
+// slot en un `.carrusel-item` y clonando el set original para lograr el loop
+// sin salto visible (ver ese archivo para el detalle).
+interface Props {
+  // Ancho mínimo (px) -> cantidad de items visibles a partir de ese ancho.
+  // Igual que el `responsive` de owl: se usa el breakpoint más grande que
+  // sea <= al ancho actual de la ventana.
+  itemsPorAncho: Record<number, number>;
+  // Separación entre items, en px (igual al `margin` de owl). 0 si no se pasa.
+  margen?: number;
+  // Clase(s) extra para el contenedor raíz: permite seguir enganchando con
+  // el CSS propio de cada página (p. ej. "colaboradores-logos",
+  // "proyectos-imgs"), que define ancho/alto/margen del carrusel.
+  class?: string;
+}
+
+// Cualquier otra prop (p. ej. data-aos) se reenvía tal cual al contenedor
+// raíz, para no perder atributos que ya traía el div del carrusel original.
+const { itemsPorAncho, margen = 0, class: claseExtra, ...resto } = Astro.props;
+const id = 'carrusel-' + Math.random().toString(36).slice(2, 8);
+---
+<div
+  class:list={['carrusel', claseExtra]}
+  data-carrusel
+  id={id}
+  data-config={JSON.stringify({ itemsPorAncho, margen })}
+  {...resto}
+>
+  <div class="carrusel-pista">
+    <slot />
+  </div>
+</div>

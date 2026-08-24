@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  titulo="Aviso de Privacidad | SupJuvABP"
+  headerFijo={true}
+  mostrarAviso={true}
+  verEstilo="1.3"
+  seo={false}
+  animacionesCss={true}
+>
+  <!-- .baseline/aviso.html es la única página del original cuyo <head> NO
+       trae meta description, los og:*/twitter:*, canonical/hreflang/robots,
+       og:site_name/locale/dimensiones ni el <script type="application/ld+json">
+       (solo charset, viewport, theme-color, style.css?ver=1.3 y aos.css).
+       seo={false} apaga ese bloque entero en Base.astro en vez de mandarlo
+       igual que en las otras 4 páginas: entre otras cosas, evita declarar un
+       <link rel="canonical" href="https://superacionjuvenil.org/"> que
+       marcaría a aviso.html como duplicado de la portada ante buscadores,
+       algo que el sitio original no hace. -->
+  <!-- Contenido extraído con: sed -n '47,91p' .baseline/aviso.html -->
+  <!-- (47..115 menos el footer, que ya se renderiza vía <Footer mostrarAviso={true} /> en Base.astro) -->
+
+
+    <div class="unete-header">
+        <h1 data-aos="fade-right" data-aos-delay="150">Aviso de Privacidad</h1>
+    </div>
+    
+    <div class="aviso-text" style="text-align: justify; width: 80%; margin: auto; font-family: Poppins-Regular, sans-serif; font-size: 1.2rem; color: black; padding-top: 3rem; padding-bottom: 3rem;">
+        <!-- El original (.baseline/aviso.html) abre un <p> acá y nunca lo cierra: el
+             resto del bloque, incluidos los <ul> y el <h3>, queda "adentro" en el
+             HTML fuente. Un navegador real no permite <ul>/<h3> dentro de <p> y
+             cierra el <p> implícitamente al toparse con el primer elemento de bloque
+             (algoritmo de parsing de HTML5); todo lo que sigue después de esa
+             ruptura queda como texto suelto dentro de .aviso-text, sin otro <p>.
+             Astro exige tags balanceados, así que se replica acá a mano el mismo
+             árbol que arma el navegador (</p> antes del primer <ul>, sin volver a
+             abrir <p> después) en vez de envolver todo el bloque en un solo <p>,
+             que cambiaría los márgenes por defecto de <p> y la altura de la página. -->
+        <p>
+        Superación Juvenil, ABP, con domicilio en Loma Redonda #1517 Col. Loma Larga en Monterrey, NL. México, es responsable de recabar sus datos personales o fiscales, del uso que se le dé a los mismos y de su protección.
+        <br><br>
+        Su información personal permitirá a la Asociación estar en contacto con usted, proporcionar un servicio o atender alguna consulta que se haya solicitado, así como dar seguimiento a donativos otorgados ya sea por personas físicas o morales.
+        <br><br>
+        La información personal recopilada puede incluir los siguientes datos para una persona física:
+        <br><br>
+        </p>
+        <ul style="padding-left: 4rem;">
+            <li>RFC</li>
+            <li>Nombre completo</li>
+            <li>Copia de Identificación oficial</li>
+            <li>Domicilio personal o de trabajo</li>
+            <li>Correo Electrónico personal o de trabajo</li>
+        </ul>
+        <br><br>
+        De acuerdo a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares en caso de una aportación mediante tarjeta de crédito o débito los datos recopilados serán: Titular de la misma, Banco, Fecha de vencimiento y número de tarjeta.
+        <br><br>
+        Así como también recopilaremos información referente a personas morales, tales como:
+        <br><br>
+        <ul style="padding-left: 4rem;">
+            <li>RFC</li>
+            <li>Acta constitutiva</li>
+            <li>Poder notarial vigente</li>
+            <li>IFE del representante legal</li>
+            <li>Cédula de identificación fiscal</li>
+            <li>Comprobante de domicilio.</li>
+        </ul>
+        <br><br>
+        Usted tiene derecho de acceder, rectificar y cancelar sus datos personales, así como de oponerse al tratamiento de los mismos o revocar el consentimiento que para tal fin nos haya otorgado. Este derecho lo podrá hacer valer comunicándose al departamento de Desarrollo Institucional al teléfono (81) 13. 52. 53. 33 o escribiendo un correo electrónico a  desarrollo@superacionjuvenil.org
+        <br><br>
+        Este aviso de privacidad puede ser modificado por Superación Juvenil, A.B.P.; dichas modificaciones serán oportunamente informadas a través de correo electrónico o cualquier otro medio que la Asociación determine para tal efecto.
+        <br><br>
+        <h3>CÓMO PROTEGEMOS SUS DATOS PERSONALES</h3>
+        <br>
+        Todo el personal de la Institución que maneja, usa, recaba o transfiere datos personales en cualquier fase del tratamiento de los mismos, está obligado a mantener secreto, discreción, confidencialidad y custodia sobre los mismos. El personal de Superación Juvenil, A.B.P. se encuentra debidamente capacitado y comprometido para tratar sus datos personales preservando su confidencialidad y privacidad.
+        <br><br>
+        (Última fecha de actualización: agosto/2024)
+    </div>
+
+
+  <!-- Igual que el original, esta página no carga menu.js: iniciarMenu() (ver
+       src/scripts/menu.js) solo se invoca desde index.astro y proyectos.astro.
+       El menú hamburguesa se sigue abriendo (es puro CSS del checkbox #menu-chk)
+       pero no bloquea el scroll acá. Es intencional, replica el comportamiento
+       del sitio original: no agregar el import de menu.js a esta página. -->
+  <Fragment slot="scripts">
+        <script>
+            import { iniciarAnimaciones } from '../scripts/animaciones.js';
+            iniciarAnimaciones();
+        </script>
+        <script>
+            import { iniciarCopiar } from '../scripts/copiar.js';
+            iniciarCopiar();
+        </script>
+  </Fragment>
+</Base>

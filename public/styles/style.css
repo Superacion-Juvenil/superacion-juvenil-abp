@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* style.css — índice. El sitio original tenía todo en un solo archivo; se
+   partió en archivos por sección (Task 4 de la migración a Astro) sin
+   reordenar ni una regla: cada @import cubre un rango contiguo de líneas
+   del style.css original y aparecen aquí en el mismo orden en que
+   aparecían esas reglas en el archivo original. La cascada depende de
+   este orden — no reordenar. */
+@import url("base.css");
+@import url("home.css");
+@import url("nosotros.css");
+@import url("proyectos.css");
+@import url("header.css");
+@import url("unete.css");
+@import url("header-fijo.css");

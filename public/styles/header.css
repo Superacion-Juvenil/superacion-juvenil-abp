@@ -1,0 +1,230 @@
+/* header.css — style.css original líneas 2556-2781: primer bloque de header (reset universal, body,
+   menú móvil #header label/nav, .nav-desk) con sus media queries. Este bloque queda ANTES de unete.css
+   en el archivo original: no se reordenó. Ver también header-fijo.css para el segundo bloque de header,
+   que en el original aparece después de unete.css. */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 900px; /* Estilo de prueba nada más para que salga la barra de deslizar */
+}
+
+#header label {
+  width: 30px;
+  height: 28px;
+  display: flex;
+  flex-flow: wrap;
+  justify-items: center;
+  position: absolute;
+  /* Para cambiarle la posición usa estos dos */
+  top: 55px;
+  right: 35px;
+  /* Para cambiarle el tamaño usa el transform */
+  transform: scale(1.4);
+  transition: 0.3s;
+  /* El z index es para que se ponga encima del nav */
+  z-index: 3;
+  cursor: pointer;
+}
+
+#header nav {
+  /* Este es el menu que sale de la derecha */
+  position: fixed;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  /* Si quieres que sala de la izquierda usa -100% en el translateX */
+  transform: translateX(100%);
+  transition: 250ms ease-in-out;
+  /* Puedes hacerlo más ancho si quieres con el width */
+  width: 60%;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  font-size: 14pt;
+  margin: auto;
+  margin-right: auto;
+  /* Con este puedes cambiarle el color, ahorita tiene un fondo semi transparente con desenfoque, pero puedes ponerle color solido */
+  background-color: rgba(81, 118, 160, 0.6274509804);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+/* Este hace que las opciones del nav se acomoden dentro del menu deslizable */
+#header .header-option {
+  width: 100%;
+  text-align: left;
+  font-size: 1.3em;
+  margin-top: 40px;
+  width: 50%;
+  text-align: center;
+  font-family: ApexLight, sans-serif;
+}
+
+#header .header-aportar {
+  text-align: center; /* Center the content horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 2.3rem;
+  color: white;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1rem;
+  margin-top: 25%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #1B4D87;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.31), 0 6px 20px 0 rgba(0, 0, 0, 0.31);
+}
+
+#header .header-option a {
+  color: #fff;
+  text-decoration: none;
+  font-family: sans-serif;
+  /* Este es el estilo del texto del menu, puedes cambiarle los colores y así */
+}
+
+#header label {
+  display: none;
+  /* Este display none sale por defecto en none porque en versiones de escritorio no se muestra el menú hamburguesa, yo uso un max width:900px display flex para que se muestre solo en dispositivos moviles */
+}
+
+#header label div {
+  width: 30px;
+  height: 2px;
+  transition: 0.4s;
+  background-color: #1B4D87;
+  /* Estas son las barritas del menu, puedes cambiarle el color */
+}
+
+/* Aqui es donde se hace la animación del menu y saca el nav deslizable y cambian las barritas y así */
+#menu-chk:checked ~ #header nav {
+  transform: translate(0%);
+}
+
+#menu-chk:checked ~ #header label {
+  /* right: 105px; */
+  transition: 0.3s;
+}
+
+#menu-chk:checked ~ #header label div:nth-child(1) {
+  transform: rotate(45deg) translateY(10px) translateX(2px);
+  transition: 0.3s;
+}
+
+#menu-chk:checked ~ #header label div:nth-child(2) {
+  display: none;
+}
+
+#menu-chk:checked ~ #header label div:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+  transition: 0.3s;
+}
+
+#menu-chk:checked ~ #dim-menu-close {
+  transform: translate(0%);
+  transition: 0.3s;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  background-color: #1B4D87;
+  opacity: 0.3;
+  z-index: 1;
+  cursor: alias;
+}
+
+.nav-desk {
+  display: flex;
+  width: -moz-max-content;
+  width: max-content;
+  color: #103260;
+  font-size: 15pt;
+  margin: auto;
+  margin-right: 5%;
+  z-index: 1;
+}
+.nav-desk .header-option-desk {
+  margin: 20px;
+  text-align: center;
+  font-family: ApexLight, sans-serif;
+}
+.nav-desk a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  position: relative;
+}
+.nav-desk a:not([nav-active=true]):before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -6px;
+  left: 0;
+  background: #5176A0;
+  visibility: hidden;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: 0.3s;
+}
+.nav-desk a:not([nav-active=true]):hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+.nav-desk [nav-active=true]::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  bottom: -6px;
+  left: 50%;
+  visibility: visible;
+  border-radius: 5px;
+  transform: scaleX(1) translate(-50%);
+  transition: 0.3s;
+}
+.nav-desk .header-aportar-desk {
+  text-align: center; /* Center the content horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: -moz-max-content;
+  width: max-content;
+  height: 2.2rem;
+  color: white;
+  font-family: Poppins-Regular, sans-serif;
+  font-size: 1rem;
+  margin: auto;
+  background-color: #1B4D87;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.51), 0 6px 20px 0 rgba(0, 0, 0, 0.51);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  #header label {
+    display: flex;
+  }
+  .nav-desk {
+    display: none;
+  }
+}
+@media screen and (max-width: 430px) {
+  #header .header-option {
+    font-size: 2rem;
+  }
+}

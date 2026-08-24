@@ -1,0 +1,246 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Carrusel from '../components/Carrusel.astro';
+import logoAportar from '../assets/LOGOSJPANTONES-04.png';
+import iconoValores1 from '../assets/iconos web-01.png';
+import iconoValores2 from '../assets/iconos web-02.png';
+import iconoValores3 from '../assets/iconos web-03.png';
+import iconoValores4 from '../assets/iconos web-04.png';
+import iconoValores5 from '../assets/iconos web-05.png';
+import iconoValores6 from '../assets/iconos web-06.png';
+import programaBrecha from '../assets/programa-brecha.webp';
+import programaConferencia from '../assets/programa-conferencia.webp';
+import programaVerano from '../assets/programa-verano.webp';
+import logoPatron from '../assets/logo-secretaria-igualdad-inclusion.png';
+---
+<Base
+  titulo="Superación Juvenil ABP"
+  descripcion="Nuestra misión: Crear ambientes en donde los jóvenes aprendan, vivan y transmitan una cultura de valores humanos y formarlos a través de programas preventivos que los impulsen a transformar su entorno y la sociedad."
+  canonica="https://superacionjuvenil.org/"
+  carruselCss={true}
+  animacionesCss={true}
+>
+  <!-- Contenido extraído con:  sed -n '85,269p' .baseline/index.html  -->
+  <!-- (85..294 menos el bloque de footer, que ya se renderiza vía <Footer /> en Base.astro) -->
+
+    <div id="aportar-images" class="aportar aportar-image1">
+        <div class="aportar-center">
+            <!-- srcset generado por astro:assets (Task 8). El original tenía una cuarta
+                 variante manual, LOGOSJPANTONES-04_2263.png, que daba 404 en el sitio en
+                 vivo (nunca se generó): a propósito no se agrega 2263 a `widths` para no
+                 "arreglar" ese 404 y así no cambiar qué candidato de srcset gana en cada
+                 ancho de viewport. -->
+            <Image
+                src={logoAportar}
+                width={1850}
+                widths={[256, 1320, 1850]}
+                sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 800px,
+                (min-width: 820px) 750px,
+                (min-width: 660px) 600px,
+                (min-width: 500px) 400px,
+                (min-width: 320px) 300px,
+                (min-width: 280px) 250px, calc(-5320vw + 17280px)"
+                quality={82}
+                loading="eager"
+                alt="Logo en blanco"
+            />
+            <div class="line"></div>
+            <div class="aportar-texto">
+                Más que nuestra misión, nuestro estilo de vida
+            </div>
+            <div class="aportar-button">
+                <a href="unete.html" style="text-decoration: none; color: white;">
+                    Aportar a la causa
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/7nUs2Mr0C38?si=fGI8ErITXPq3mJSR&amp;controls=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" ></iframe>
+    </div>
+
+    <div class="valores">
+        <div class="title-v-p" data-aos="fade-in">
+            Nuestros valores
+        </div>
+
+        <div class="valores-burbujas">
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores1} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
+                <div class="burbuja-text-left" data-aos="fade-right">Transformación del individuo</div>
+            </div>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores2} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
+                <div class="burbuja-text-right" data-aos="fade-left">La prevención como solución</div>
+            </div>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores3} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
+                <div id="burb-voluntariado" class="burbuja-text-left" data-aos="fade-right" style="margin-left: 10.5rem;">Voluntariado</div>
+            </div>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores4} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
+                <div class="burbuja-text-right" data-aos="fade-left">Compromiso</div>
+            </div>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores5} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
+                <div id="burb-convicc" class="burbuja-text-left" data-aos="fade-right" style="margin-left: 3rem;">Convicciones profundas</div>
+            </div>
+            <div class="burbuja-container"><Image class="burbuja" src={iconoValores6} alt="icons" quality={82} data-aos="flip-left" data-aos-delay="50" data-aos-easing="ease-out-cubic" />
+                <div class="burbuja-text-right" data-aos="fade-left">Relaciones profundas</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="programas">
+        <div class="title-v-p" data-aos="zoom-in-down">
+            Nuestros Programas
+        </div>
+        <div class="programas-info">
+            <div class="p">
+                <div class="prog-blanco1"></div>
+
+                <div class="prog-azul" style="background: linear-gradient(to right, transparent, #103260 16%); height: 450px; margin-left: -10%;">
+                    <div class="prog-texto" data-aos="fade-left">
+                        <h2>Programa de Adolescentes</h2>
+                        <p>Participan jóvenes de 13 a 17 años. El programa se divide en secundaria mujeres, secundaria hombres y preparatoria mixto; a través de actividades formativas, deportivas, recreativas y de alto impacto promovemos un desarrollo positivo en nuestros adolescentes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p">
+                <div class="prog-azul" style="background: linear-gradient(to left, transparent, #1B4D87 16%); height: 450px; margin-right: -10%;">
+                    <div class="prog-texto" style="margin-left: 10% !important; text-align: right; margin-top: -3rem" data-aos="fade-right">
+                        <h2>Programa de Universitarios</h2>
+                        <p>Participan jóvenes de 18 a 25 años de edad del área metropolitana de Monterrey. Los jóvenes reciben formación a través de talleres, dinámicas, cursos, acompañamiento individual, servicio comunitario y actividades de alto impacto.</p>
+                    </div>
+                </div>
+                <div class="prog-blanco2"></div>
+            </div>
+
+            <div class="p">
+                <div class="prog-blanco3"></div>
+                
+                <div class="prog-azul" style="background: linear-gradient(to right, transparent, #5176A0 16%); height: 450px; margin-left: -10%;">
+                    <div class="prog-texto" data-aos="fade-left">
+                        <h2>Programa en la Brecha</h2>
+                        <p>Tiene como objetivo contribuir al fortalecimiento, desarrollo y formación de los jóvenes en carácter, criterio ético, compromiso, liderazgo y servicio. Los jóvenes brechistas ofrecen de 6 a 12 meses de su vida como voluntarios para recibir entrenamiento y servir entre nuestros jóvenes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="historia">
+        <div class="historia-title">
+            <h2>A lo largo de nuestra historia hemos impactado a más de:</h2>
+            <div class="count-up1 count-up2" data-val="28623" data-step="10">000,000</div>
+            <h2>Jóvenes entre 13 y 25 años</h2>
+        </div>
+        
+        <div class="historia-programas">
+            <div class="brecha">
+                <div class="count-up2" data-aos="fade-up" data-aos-delay="150" data-val = '230' data-step="1"></div>
+                <!-- srcset generado por astro:assets (Task 8), reemplaza las variantes
+                     manuales _256/_900/_1560 (borradas: astro:assets genera las suyas). -->
+                <Image
+                    src={programaBrecha}
+                    width={1560}
+                    widths={[256, 900, 1560]}
+                    sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 500px,
+                (min-width: 920px) 400px,
+                (min-width: 660px) 350px,
+                (min-width: 500px) 200px,
+                (min-width: 340px) 120px"
+                    quality={82}
+                    alt="Programa de la Brecha" data-aos="fade-up" data-aos-delay="200" loading="lazy" />
+                <div class="programa-etiqueta" data-aos="fade-up" data-aos-delay="150">Programa de la Brecha</div>
+            </div>
+
+            <div class="conferencia">
+                <div class="count-up2" data-aos="fade-up" data-aos-delay="150" data-val = '780' data-step="3"></div>
+                <!-- <img src="./assets/programa-conferencia.webp" alt="Programa de conferencia" data-aos="fade-up" data-aos-delay="200"> -->
+                <!-- srcset generado por astro:assets (Task 8), reemplaza las variantes
+                     manuales _256/_900/_1560 (borradas: astro:assets genera las suyas). -->
+                <Image
+                    src={programaConferencia}
+                    width={1560}
+                    widths={[256, 900, 1560]}
+                    sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 500px,
+                (min-width: 920px) 400px,
+                (min-width: 660px) 350px,
+                (min-width: 500px) 200px,
+                (min-width: 340px) 120px"
+                    quality={82}
+                    alt="Programa de conferencia" data-aos="fade-up" data-aos-delay="200" loading="lazy" />
+                <div class="programa-etiqueta" data-aos="fade-up" data-aos-delay="150">Participantes de conferencias</div>
+            </div>
+
+            <div class="verano">
+                <div class="count-up2" data-aos="fade-up" data-aos-delay="150" data-val= '2230' data-step="4"></div>
+                <!-- <img src="./assets/programa-verano.webp" alt="Programa de verano" data-aos="fade-up" data-aos-delay="200"> -->
+                <!-- srcset generado por astro:assets (Task 8), reemplaza las variantes
+                     manuales _256/_900/_1560 (borradas: astro:assets genera las suyas). -->
+                <Image
+                    src={programaVerano}
+                    width={1560}
+                    widths={[256, 900, 1560]}
+                    sizes="(min-width: 1860px) 720px,
+                (min-width: 1300px) 500px,
+                (min-width: 920px) 400px,
+                (min-width: 660px) 350px,
+                (min-width: 500px) 200px,
+                (min-width: 340px) 120px"
+                    quality={82}
+                    alt="Programa de verano" data-aos="fade-up" data-aos-delay="200" loading="lazy" />
+                <div class="programa-etiqueta" data-aos="fade-up" data-aos-delay="150">Actividades de Verano</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="colaboradores">
+        <div class="colab-title">Damos gracias a nuestros colaboradores</div>
+        <Carrusel
+            itemsPorAncho={{ 0: 4, 600: 3, 800: 4, 1000: 5 }}
+            margen={1}
+            class="colaboradores-logos"
+            data-aos="zoom-up"
+        >
+            <div class="tarjeta tarj3"></div>
+            <div class="tarjeta tarj4"></div>
+            <div class="tarjeta tarj5"></div>
+            <div class="tarjeta tarj6"></div>
+            <div class="tarjeta tarj7"></div>
+            <div class="tarjeta tarj8"></div>
+        </Carrusel>
+    </div>
+
+    <!-- Patron / Sponsor banner -->
+    <div class="patron-banner" data-aos="fade-up">
+        <div class="patron-center">
+            <div class="patron-text">Esta página fue actualizada gracias a nuestro donador</div>
+            <div class="patron-logo">
+                <Image src={logoPatron} alt="Patrón - Secretaría Igualdad e Inclusión" quality={82} loading="lazy" />
+            </div>
+        </div>
+    </div>
+
+  <Fragment slot="scripts">
+    <script>
+      import { iniciarAnimaciones } from '../scripts/animaciones.js';
+      iniciarAnimaciones();
+    </script>
+    <script>
+      import { iniciarHero } from '../scripts/hero.js';
+      iniciarHero();
+    </script>
+    <script src="js/carrusel.js" is:inline></script>
+    <script>
+      import { iniciarMenu } from '../scripts/menu.js';
+      iniciarMenu();
+    </script>
+    <script>
+      import { iniciarContador } from '../scripts/contador.js';
+      iniciarContador();
+    </script>
+  </Fragment>
+</Base>
