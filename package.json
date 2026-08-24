@@ -11,7 +11,8 @@
     "build": "astro build",
     "visual": "node visual/compare.mjs",
     "verificar-fixes": "node scripts/verificar-fixes.mjs",
-    "verificar-animaciones": "node scripts/verificar-animaciones.mjs"
+    "verificar-animaciones": "node scripts/verificar-animaciones.mjs",
+    "corregir-titulos-pdf": "node scripts/corregir-titulos-pdf.mjs"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "private": "true",
   "type": "module",
   "devDependencies": {
+    "pdf-lib": "^1.17.1",
     "pixelmatch": "^7.2.0",
     "playwright": "^1.62.1",
     "pngjs": "^7.0.0",
